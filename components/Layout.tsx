@@ -1,6 +1,7 @@
 import * as React from "react";
-import Link from "next/link";
 import Head from "next/head";
+import Footer from "./Footer";
+import Header from "./Header";
 
 const titleSuffix = "Portfolio";
 
@@ -18,58 +19,47 @@ const Layout: React.FunctionComponent<Props> = ({
     <style jsx>
       {`
         .layout {
-          font-family: sans-serif;
-        }
-
-        header {
           display: flex;
-          flex-direction: row;
+          font-family: Lato, sans-serif;
+          color: rgba(0, 0, 0, 0.87);
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          min-height: 100vh;
         }
 
-        header nav {
-          flex: 1 0 auto;
-          text-align: right;
-        }
-
-        .my-name {
-          flex: 0 0 8rem;
-          font-weight: bold;
+        main {
+          width: 100%;
+          max-width: 1000px;
+          padding: 1rem;
+          flex-grow: 1;
         }
       `}
     </style>
+    <style jsx global>{`
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    `}</style>
     <Head>
       <title>{title ? `${title} | ${titleSuffix}` : titleSuffix}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet"
+      />
     </Head>
-    <header>
-      <div className="my-name">
-        <Link href="/">
-          <a>Damon Cai</a>
-        </Link>{" "}
-      </div>
-      <nav>
-        {" "}
-        <Link href="/about">
-          <a>About</a>
-        </Link>{" "}
-        |{" "}
-        <Link href="/projects">
-          <a>Projects List</a>
-        </Link>
-        {preview && (
-          <>
-            {" "}
-            | <a href="/api/exit-preview">Exit Preview Mode</a>
-          </>
-        )}
-      </nav>
-    </header>
-    {children}
-    <footer>
-      <hr />
-      <span>Footer Placeholder</span>
-    </footer>
+    <Header preview={preview} />
+    <main>{children}</main>
+    <Footer />
   </div>
 );
 

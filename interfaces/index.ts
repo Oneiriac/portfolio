@@ -1,6 +1,10 @@
 export type ProjectData = {
   name: string;
-  description: string;
+  summary: string;
+  start_date: string;
+  end_date: string;
+  ongoing: boolean;
+  technology_link: any[];
 };
 
 type ImageData = {

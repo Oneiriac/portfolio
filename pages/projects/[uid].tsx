@@ -22,27 +22,44 @@ const Project: React.FunctionComponent<Props> = (props) => {
 
   return (
     <Layout title={projectName} preview={preview}>
+      <style jsx>{`
+        h1 {
+          font-weight: 900;
+        }
+        .techs-used {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .techs-used span {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+      `}</style>
       {projectData && (
-        <div>
+        <>
           <h1>{projectName}</h1>
           <div>
-            {projectStart} to {projectEnd}
+            <em>
+              {projectStart} to {projectEnd}
+            </em>
           </div>
-          <h3>Technologies used</h3>
-          <div>
+          <section className="techs-used">
+            <h3>Technologies used</h3>
             {techsUsed.map((tech) => (
               <span key={tech.name}>
+                {tech.name}
                 <img
-                  width={32}
-                  height={32}
+                  width={24}
+                  height={24}
                   src={tech.icon.url}
                   alt={tech.icon.alt ?? undefined}
                 />
-                {tech.name}
               </span>
             ))}
-          </div>
-        </div>
+          </section>
+        </>
       )}
     </Layout>
   );
