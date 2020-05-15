@@ -1,10 +1,13 @@
 import React from "react";
 import { GetStaticProps, GetStaticPaths } from "next";
+import { RichText } from "prismic-reactjs";
 import { Predicates } from "prismic-javascript";
+import dayjs from "dayjs";
 
 import Layout from "../../components/Layout";
 import { Client } from "../../prismic-configuration";
 import { TechnologyData } from "../../interfaces";
+import TechnologyList from "../../components/TechnologyList";
 
 const client = Client();
 
@@ -17,8 +20,8 @@ type Props = {
 const Project: React.FunctionComponent<Props> = (props) => {
   const { projectData, techsUsed, preview } = props;
   const projectName = projectData.name;
-  const projectStart = projectData.start_date;
-  const projectEnd = projectData.end_date;
+  const projectStart = dayjs(projectData.start_date).format("MMMM YYYY");
+  const projectEnd = dayjs(projectData.end_date).format("MMMM YYYY");
 
   return (
     <Layout title={projectName} preview={preview}>
@@ -26,15 +29,9 @@ const Project: React.FunctionComponent<Props> = (props) => {
         h1 {
           font-weight: 900;
         }
-        .techs-used {
-          display: flex;
-          flex-direction: column;
-        }
 
-        .techs-used span {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
+        .description {
+          line-height: 1.5;
         }
       `}</style>
       {projectData && (
@@ -42,23 +39,13 @@ const Project: React.FunctionComponent<Props> = (props) => {
           <h1>{projectName}</h1>
           <div>
             <em>
-              {projectStart} to {projectEnd}
+              {projectStart}–{projectData.ongoing ? "Present" : projectEnd}
             </em>
           </div>
-          <section className="techs-used">
-            <h3>Technologies used</h3>
-            {techsUsed.map((tech) => (
-              <span key={tech.name}>
-                {tech.name}
-                <img
-                  width={24}
-                  height={24}
-                  src={tech.icon.url}
-                  alt={tech.icon.alt ?? undefined}
-                />
-              </span>
-            ))}
+          <section className="description">
+            <RichText render={projectData.description} />
           </section>
+          <TechnologyList techsUsed={techsUsed} />
         </>
       )}
     </Layout>
@@ -109,9 +96,9 @@ export const getStaticProps: GetStaticProps = async ({
   if (Array.isArray(techLink)) {
     const techIds = techLink.map((entry) => entry.technology.id);
     techsUsed = (
-      await client.query([Predicates.any("document.id", techIds)], {})
+      await client.query([Predicates.any("document.id", techIds)], { ref })
     )?.results.map((entry) => entry.data);
-    console.log(techsUsed[0]);
+    console.log(techsUsed);
   }
   if (doc?.data)
     return { props: { projectData: doc.data, techsUsed, preview } };
