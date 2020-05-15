@@ -14,7 +14,7 @@ const Header: React.FunctionComponent<Props> = ({ preview }) => (
         width: 100%;
         line-height: 1.5;
         background-color: #222;
-        padding: 12px 24px;
+        padding: 0.75rem 1rem;
       }
 
       nav {
