@@ -6,19 +6,27 @@ import dayjs from "dayjs";
 
 import Layout from "../../components/Layout";
 import { Client } from "../../prismic-configuration";
-import { TechnologyData } from "../../interfaces";
-import TechnologyList from "../../components/TechnologyList";
+import { ProjectData, TechnologyData } from "../../interfaces";
+import TechnologyList from "./_TechnologyList";
+import FlexColumn from "../../components/FlexColumn";
 
 const client = Client();
 
 type Props = {
-  projectData: any;
+  projectData: ProjectData;
+  uid: string;
   techsUsed: TechnologyData[];
   preview?: boolean;
 };
 
-const Project: React.FunctionComponent<Props> = (props) => {
-  const { projectData, techsUsed, preview } = props;
+const projectColumnBasis = "15rem";
+
+const Project: React.FunctionComponent<Props> = ({
+  projectData,
+  uid,
+  techsUsed,
+  preview,
+}) => {
   const projectName = projectData.name;
   const projectStart = dayjs(projectData.start_date).format("MMMM YYYY");
   const projectEnd = dayjs(projectData.end_date).format("MMMM YYYY");
@@ -30,10 +38,6 @@ const Project: React.FunctionComponent<Props> = (props) => {
           font-weight: 900;
         }
 
-        .description {
-          line-height: 1.5;
-        }
-
         .project-flex {
           display: flex;
           flex-direction: row;
@@ -41,19 +45,16 @@ const Project: React.FunctionComponent<Props> = (props) => {
           /* Once column-gap is widely supported switch to it: until then, use negative margin hack */
           /* column-gap: 2rem; */
           margin-right: -3rem;
+          line-height: 1.5;
         }
 
         .project-flex > :global(*) {
           margin-right: 3rem;
         }
-
-        .project-details {
-          flex: 2 1 30rem;
-        }
       `}</style>
       {projectData && (
-        <>
-          <section className="project-info">
+        <article id={`project-${uid}`}>
+          <section className="project-hero">
             <h1>{projectName}</h1>
             <div>
               <em>
@@ -62,14 +63,25 @@ const Project: React.FunctionComponent<Props> = (props) => {
             </div>
           </section>
           <div className="project-flex">
-            <section className="project-details">
-              <section className="description">
+            <FlexColumn
+              as="section"
+              className="project-details"
+              columnBasis={projectColumnBasis}
+              columnSpan={2}
+            >
+              <section className="project-description">
+                <h3>Project description</h3>
                 <RichText render={projectData.description} />
               </section>
-            </section>
-            <TechnologyList techsUsed={techsUsed} />
+            </FlexColumn>
+            <TechnologyList
+              as="aside"
+              techsUsed={techsUsed}
+              columnBasis={projectColumnBasis}
+              columnSpan={1}
+            />
           </div>
-        </>
+        </article>
       )}
     </Layout>
   );
@@ -121,10 +133,9 @@ export const getStaticProps: GetStaticProps = async ({
     techsUsed = (
       await client.query([Predicates.any("document.id", techIds)], { ref })
     )?.results.map((entry) => entry.data);
-    console.log(techsUsed);
   }
   if (doc?.data)
-    return { props: { projectData: doc.data, techsUsed, preview } };
+    return { props: { projectData: doc.data, uid, techsUsed, preview } };
   else throw new Error("No document loaded");
 };
 

@@ -1,6 +1,7 @@
 export type ProjectData = {
   name: string;
   summary: string;
+  description: any;
   start_date: string;
   end_date: string;
   ongoing: boolean;
