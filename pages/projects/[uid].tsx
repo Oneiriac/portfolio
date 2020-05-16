@@ -33,19 +33,42 @@ const Project: React.FunctionComponent<Props> = (props) => {
         .description {
           line-height: 1.5;
         }
+
+        .project-flex {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          /* Once column-gap is widely supported switch to it: until then, use negative margin hack */
+          /* column-gap: 2rem; */
+          margin-right: -3rem;
+        }
+
+        .project-flex > :global(*) {
+          margin-right: 3rem;
+        }
+
+        .project-details {
+          flex: 2 1 30rem;
+        }
       `}</style>
       {projectData && (
         <>
-          <h1>{projectName}</h1>
-          <div>
-            <em>
-              {projectStart}–{projectData.ongoing ? "Present" : projectEnd}
-            </em>
-          </div>
-          <section className="description">
-            <RichText render={projectData.description} />
+          <section className="project-info">
+            <h1>{projectName}</h1>
+            <div>
+              <em>
+                {projectStart}–{projectData.ongoing ? "Present" : projectEnd}
+              </em>
+            </div>
           </section>
-          <TechnologyList techsUsed={techsUsed} />
+          <div className="project-flex">
+            <section className="project-details">
+              <section className="description">
+                <RichText render={projectData.description} />
+              </section>
+            </section>
+            <TechnologyList techsUsed={techsUsed} />
+          </div>
         </>
       )}
     </Layout>

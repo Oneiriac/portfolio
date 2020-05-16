@@ -6,9 +6,10 @@ type Props = {
 };
 
 const TechnologyList: React.FunctionComponent<Props> = ({ techsUsed }) => (
-  <section className="tech-list">
+  <aside className="tech-list">
     <style jsx>{`
       .tech-list {
+        flex: 1 1 15rem;
         display: flex;
         flex-direction: column;
       }
@@ -34,7 +35,7 @@ const TechnologyList: React.FunctionComponent<Props> = ({ techsUsed }) => (
           {tech.name}
         </span>
       ))}
-  </section>
+  </aside>
 );
 
 export default TechnologyList;
