@@ -27,7 +27,7 @@ const Header: React.FunctionComponent<Props> = ({ preview }) => (
       }
 
       .my-name {
-        flex: 0 0 8rem;
+        flex: 0 0 auto;
         font-weight: bold;
       }
 
@@ -60,12 +60,12 @@ const Header: React.FunctionComponent<Props> = ({ preview }) => (
       </Link>
       <span className="divider" />
       <Link href="/projects">
-        <a>Projects List</a>
+        <a>Projects</a>
       </Link>
       {preview && (
         <>
           <span className="divider" />
-          <a href="/api/exit-preview">Exit Preview Mode</a>
+          <a href="/api/exit-preview">Exit Preview</a>
         </>
       )}
     </nav>

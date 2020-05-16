@@ -28,11 +28,19 @@ const Layout: React.FunctionComponent<Props> = ({
           min-height: 100vh;
         }
 
-        main {
+        .grid-wrapper {
           width: 100%;
-          max-width: 1000px;
-          padding: 1rem;
+          display: grid;
+          grid-template-columns: minmax(1.2rem, 1fr) minmax(0, 10fr) minmax(
+              1.2rem,
+              1fr
+            );
+          grid-gap: 1rem;
           flex-grow: 1;
+        }
+
+        main {
+          padding: 1rem 0;
         }
       `}
     </style>
@@ -41,6 +49,10 @@ const Layout: React.FunctionComponent<Props> = ({
       ::before,
       ::after {
         box-sizing: border-box;
+      }
+
+      html {
+        font-size: max(calc((1vmin + 1vmax) / 4 + 0.75em), 1em);
       }
 
       body {
@@ -58,7 +70,11 @@ const Layout: React.FunctionComponent<Props> = ({
       />
     </Head>
     <Header preview={preview} />
-    <main>{children}</main>
+    <div className="grid-wrapper">
+      <div />
+      <main>{children}</main>
+      <div />
+    </div>
     <Footer />
   </div>
 );
