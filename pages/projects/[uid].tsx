@@ -1,27 +1,20 @@
 import React from "react";
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { RichText } from "prismic-reactjs";
 import { Predicates } from "prismic-javascript";
 import dayjs from "dayjs";
 
 import Layout from "../../components/Layout";
-import { Client } from "../../prismic-configuration";
-import { ProjectData, TechnologyData } from "../../interfaces";
-import TechnologyList from "./_TechnologyList";
 import FlexColumn from "../../components/FlexColumn";
+import TechnologyList from "../../components/TechnologyList";
 
-const client = Client();
-
-type Props = {
-  projectData: ProjectData;
-  uid: string;
-  techsUsed: TechnologyData[];
-  preview?: boolean;
-};
+import { Client } from "../../prismic-configuration";
+import { TechnologyData } from "../../interfaces";
+import { ProjectProps } from "../../interfaces/props";
 
 const projectColumnBasis = "15rem";
 
-const Project: React.FunctionComponent<Props> = ({
+const Project: React.FunctionComponent<ProjectProps> = ({
   projectData,
   uid,
   techsUsed,
@@ -86,6 +79,8 @@ const Project: React.FunctionComponent<Props> = ({
     </Layout>
   );
 };
+
+const client = Client();
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get the paths we want to pre-render based on users

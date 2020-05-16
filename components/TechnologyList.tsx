@@ -1,6 +1,6 @@
 import * as React from "react";
-import { TechnologyData } from "../../interfaces";
-import FlexColumn, { FlexColumnProps } from "../../components/FlexColumn";
+import { TechnologyData } from "../interfaces";
+import FlexColumn, { FlexColumnProps } from "./FlexColumn";
 import css from "styled-jsx/css";
 
 interface Props extends FlexColumnProps {
@@ -30,17 +30,24 @@ const TechnologyList: React.FunctionComponent<Props> = ({
           line-height: 2;
         }
 
-        span img {
-          margin-right: 0.75rem;
+        .icon-container {
           width: 1.5rem;
-          height: 1.5rem;
+          margin-right: 0.75rem;
+        }
+
+        span img {
+          margin: 0 auto;
+          object-fit: contain;
+          height: 1.3rem;
         }
       `}</style>
 
       <h3>Technologies used</h3>
       {techsUsed.map((tech) => (
         <span key={tech.name}>
-          <img src={tech.icon.url} alt={tech.icon.alt ?? undefined} />
+          <span className="icon-container">
+            <img src={tech.icon.url} alt={tech.icon.alt ?? undefined} />
+          </span>
           {tech.name}
         </span>
       ))}

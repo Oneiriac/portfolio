@@ -8,6 +8,11 @@ export type ProjectData = {
   technology_link: any[];
 };
 
+export type AugmentedProjectData = ProjectData & {
+  uid: string;
+  techsUsed: TechnologyData[];
+};
+
 type ImageData = {
   dimensions: {
     width: number;
