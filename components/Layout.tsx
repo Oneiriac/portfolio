@@ -24,25 +24,18 @@ const Layout: React.FunctionComponent<Props> = ({
           align-items: center;
           width: 100%;
           min-height: 100vh;
+          background-color: honeydew;
+          position: relative;
         }
 
         .layout :global(h1, h2, h3, h4, h5, h6) {
           font-family: "Space Mono", monospace;
         }
 
-        .grid-wrapper {
-          width: 100%;
-          display: grid;
-          grid-template-columns: minmax(1.2rem, 1fr) minmax(0, 10fr) minmax(
-              1.2rem,
-              1fr
-            );
-          grid-gap: 1rem;
-          flex-grow: 1;
-        }
-
         main {
-          padding: 1rem 0;
+          flex-grow: 1;
+          flex-shrink: 0;
+          width: 100%;
         }
       `}
     </style>
@@ -51,11 +44,7 @@ const Layout: React.FunctionComponent<Props> = ({
       <title>{title ? `${title} | ${titleSuffix}` : titleSuffix}</title>
     </Head>
     <Header />
-    <div className="grid-wrapper">
-      <div />
-      <main>{children}</main>
-      <div />
-    </div>
+    <main>{children}</main>
     <Footer />
   </div>
 );

@@ -12,6 +12,7 @@ import { Client } from "../../prismic-configuration";
 import { TechnologyData } from "../../interfaces";
 import { ProjectProps } from "../../interfaces/props";
 import { usePreview } from "../../components/PreviewContext";
+import ContentContainer from "../../components/ContentContainer";
 
 const projectColumnBasis = "15rem";
 
@@ -47,37 +48,39 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           margin-right: 3rem;
         }
       `}</style>
-      {projectData && (
-        <article id={`project-${uid}`}>
-          <section className="project-hero">
-            <h1>{projectName}</h1>
-            <div>
-              <em>
-                {projectStart}–{projectData.ongoing ? "Present" : projectEnd}
-              </em>
+      <ContentContainer>
+        {projectData && (
+          <article id={`project-${uid}`}>
+            <section className="project-hero">
+              <h1>{projectName}</h1>
+              <div>
+                <em>
+                  {projectStart}–{projectData.ongoing ? "Present" : projectEnd}
+                </em>
+              </div>
+            </section>
+            <div className="project-flex">
+              <FlexColumn
+                as="section"
+                className="project-details"
+                columnBasis={projectColumnBasis}
+                columnSpan={2}
+              >
+                <section className="project-description">
+                  <h3>Project description</h3>
+                  <RichText render={projectData.description} />
+                </section>
+              </FlexColumn>
+              <TechnologyList
+                as="aside"
+                techsUsed={techsUsed}
+                columnBasis={projectColumnBasis}
+                columnSpan={1}
+              />
             </div>
-          </section>
-          <div className="project-flex">
-            <FlexColumn
-              as="section"
-              className="project-details"
-              columnBasis={projectColumnBasis}
-              columnSpan={2}
-            >
-              <section className="project-description">
-                <h3>Project description</h3>
-                <RichText render={projectData.description} />
-              </section>
-            </FlexColumn>
-            <TechnologyList
-              as="aside"
-              techsUsed={techsUsed}
-              columnBasis={projectColumnBasis}
-              columnSpan={1}
-            />
-          </div>
-        </article>
-      )}
+          </article>
+        )}
+      </ContentContainer>
     </Layout>
   );
 };

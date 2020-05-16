@@ -4,24 +4,21 @@ const Footer: React.FunctionComponent = () => (
   <footer>
     <style jsx>{`
       footer {
+        height: 3rem;
         width: 100%;
-        flex-grow: 0;
+        font-size: 0.75rem;
+        opacity: 0.75;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
       }
-
-      hr {
-        margin: 0;
-        padding: 0;
-      }
-
       span {
         padding: 0 1rem;
         margin: 0.5rem 0;
       }
     `}</style>
-    <hr />
-    <span>Footer Placeholder</span>
+    <span>Made with Next.js + Prismic</span>
   </footer>
 );
 

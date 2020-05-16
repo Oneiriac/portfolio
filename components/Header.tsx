@@ -8,17 +8,21 @@ const Header: React.FunctionComponent<Props> = () => (
   <header>
     <style jsx>{`
       header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
         display: flex;
         flex-direction: row;
+        opacity: 0.95;
         width: 100%;
         line-height: 1.5;
-        background-color: #222;
+        background-color: #1c0f13;
         padding: 0.75rem 1rem;
       }
 
       a {
         text-decoration: none;
-        color: #efefef;
+        color: #f0f8ea;
         transition: color 0.35s;
       }
 

@@ -1,5 +1,4 @@
 import * as React from "react";
-import Link from "next/link";
 import Layout from "../components/Layout";
 import { GetStaticProps } from "next";
 import { Predicates } from "prismic-javascript";
@@ -7,6 +6,8 @@ import { AugmentedProjectData, TechnologyData } from "../interfaces";
 import { Client } from "../prismic-configuration";
 import ProjectCard from "../components/ProjectCard";
 import { usePreview } from "../components/PreviewContext";
+import Hero from "../components/Hero";
+import ContentContainer from "../components/ContentContainer";
 
 type ProjectsIndex = AugmentedProjectData[];
 
@@ -24,49 +25,29 @@ const IndexPage: React.FunctionComponent<Props> = ({ projects, preview }) => {
         .project-card-container {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+          grid-auto-rows: 1fr;
           gap: 2rem;
-        }
-
-        .hero h1 {
-          font-size: 3rem;
-          font-weight: 900;
-          margin-bottom: 0.5rem;
-        }
-
-        .hero span {
-          font-size: 1.5rem;
-          line-height: 1.5;
         }
       `}</style>
 
-      <section className="hero">
-        <h1>Hi, I'm Damon</h1>
-        <span>
-          Software engineer,
-          <br />
-          Web developer
-        </span>
-      </section>
-      {projects && (
-        <section className="project-list">
-          <h2>Projects</h2>
-          <div className="project-card-container">
-            {projects.map((project) => (
-              <ProjectCard
-                key={project.uid}
-                projectData={project}
-                uid={project.uid}
-                techsUsed={project.techsUsed}
-              />
-            ))}
-          </div>
-        </section>
-      )}
-      <p>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </p>
+      <Hero />
+      <ContentContainer>
+        {projects && (
+          <section className="project-list">
+            <h2>Projects</h2>
+            <div className="project-card-container">
+              {projects.map((project) => (
+                <ProjectCard
+                  key={project.uid}
+                  projectData={project}
+                  uid={project.uid}
+                  techsUsed={project.techsUsed}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+      </ContentContainer>
     </Layout>
   );
 };

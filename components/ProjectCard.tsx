@@ -22,25 +22,26 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
             0 15px 40px rgba(67, 107, 227, 0.2);
           background-color: rgba(67, 107, 227, 0.65);
           color: #34384d;
-          padding: 1rem;
-          min-height: 10rem;
+          padding: 1.5rem;
+          height: 100%;
           transition: background-color 0.35s;
         }
 
-        .project-card h3 {
+        h3 {
           margin-top: 0;
+          margin-bottom: 1rem;
           transition: color 0.35s;
+        }
+
+        span {
+          transition: color 0.35s;
+          margin-bottom: 1.5rem;
         }
 
         .project-card:hover,
         .project-card:focus,
         .project-card:active {
           background-color: rgba(67, 107, 227, 1);
-        }
-
-        .project-card:hover,
-        .project-card:focus,
-        .project-card:active h3 {
           color: #dedede;
         }
 
@@ -53,13 +54,14 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
         .tech-icons-row > img {
           object-fit: contain;
           height: 1.25rem;
-          margin-right: 0.75rem;
+          margin-right: 1rem;
+          mix-blend-mode: hard-light;
         }
       `}</style>
 
       <div className="project-card">
         <h3>{projectData.name}</h3>
-        <p>{projectData.summary}</p>
+        <span>{projectData.summary}</span>
         <div className="tech-icons-row">
           {Array.isArray(techsUsed) &&
             techsUsed.map((tech) => (
