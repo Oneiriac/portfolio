@@ -1,0 +1,15 @@
+html {
+  font-size: calc((1vmin + 1vmax) / 4 + 0.75em);
+  font-size: max(calc((1vmin + 1vmax) / 4 + 0.75em), 1em);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

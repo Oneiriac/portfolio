@@ -1,11 +1,10 @@
 import * as React from "react";
 import Link from "next/link";
+import PreviewContext from "./PreviewContext";
 
-type Props = {
-  preview?: boolean;
-};
+type Props = {};
 
-const Header: React.FunctionComponent<Props> = ({ preview }) => (
+const Header: React.FunctionComponent<Props> = () => (
   <header>
     <style jsx>{`
       header {
@@ -17,6 +16,16 @@ const Header: React.FunctionComponent<Props> = ({ preview }) => (
         padding: 0.75rem 1rem;
       }
 
+      a {
+        text-decoration: none;
+        color: #efefef;
+        transition: color 0.35s;
+      }
+
+      a:hover {
+        color: #bcbcbc;
+      }
+
       nav {
         flex: 1 0 auto;
         text-align: right;
@@ -26,32 +35,34 @@ const Header: React.FunctionComponent<Props> = ({ preview }) => (
         align-items: center;
       }
 
+      nav a {
+        font-variant: all-small-caps;
+      }
+
       .my-name {
         flex: 0 0 auto;
-        font-weight: bold;
+      }
+
+      .my-name a {
+        font-family: "Space Mono", monospace;
+        font-weight: 900;
       }
 
       .divider {
-        display: inline-block;
-        width: 1px;
-        height: 1rem;
-        background-color: hsla(0, 0%, 100%, 1);
-        visibility: hidden;
-        margin: 0 0.75rem;
+        width: 1.5rem;
+        text-align: center;
+        background-color: transparent;
       }
 
-      a {
-        text-decoration: none;
+      .divider::before {
+        content: "/";
         color: #efefef;
       }
-
-      a:hover {
-        color: #bcbcbc;
-      }
     `}</style>
+
     <div className="my-name">
       <Link href="/">
-        <a>Damon Cai</a>
+        <a>damon cai</a>
       </Link>
     </div>
     <nav>
@@ -62,12 +73,16 @@ const Header: React.FunctionComponent<Props> = ({ preview }) => (
       <Link href="/projects">
         <a>Projects</a>
       </Link>
-      {preview && (
-        <>
-          <span className="divider" />
-          <a href="/api/exit-preview">Exit Preview</a>
-        </>
-      )}
+      <PreviewContext.Consumer>
+        {({ preview }) =>
+          preview && (
+            <>
+              <span className="divider" />
+              <a href="/api/exit-preview">Exit Preview</a>
+            </>
+          )
+        }
+      </PreviewContext.Consumer>
     </nav>
   </header>
 );

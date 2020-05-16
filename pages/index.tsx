@@ -6,6 +6,7 @@ import { Predicates } from "prismic-javascript";
 import { AugmentedProjectData, TechnologyData } from "../interfaces";
 import { Client } from "../prismic-configuration";
 import ProjectCard from "../components/ProjectCard";
+import { usePreview } from "../components/PreviewContext";
 
 type ProjectsIndex = AugmentedProjectData[];
 
@@ -14,43 +15,61 @@ interface Props {
   preview?: boolean;
 }
 
-const IndexPage: React.FunctionComponent<Props> = ({ projects, preview }) => (
-  <Layout title="Home" preview={preview}>
-    <style jsx>{`
-      .project-card-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-        gap: 2rem;
-      }
-    `}</style>
-    <h1>Hey there—I'm Damon 👋</h1>
-    <p>
-      Software engineer,
-      <br />
-      Linguistics student
-    </p>
-    {projects && (
-      <section className="project-list">
-        <h2>Projects</h2>
-        <div className="project-card-container">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.uid}
-              projectData={project}
-              uid={project.uid}
-              techsUsed={project.techsUsed}
-            />
-          ))}
-        </div>
+const IndexPage: React.FunctionComponent<Props> = ({ projects, preview }) => {
+  usePreview(preview);
+
+  return (
+    <Layout title="Home">
+      <style jsx>{`
+        .project-card-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+          gap: 2rem;
+        }
+
+        .hero h1 {
+          font-size: 3rem;
+          font-weight: 900;
+          margin-bottom: 0.5rem;
+        }
+
+        .hero span {
+          font-size: 1.5rem;
+          line-height: 1.5;
+        }
+      `}</style>
+
+      <section className="hero">
+        <h1>Hi, I'm Damon</h1>
+        <span>
+          Software engineer,
+          <br />
+          Web developer
+        </span>
       </section>
-    )}
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
-  </Layout>
-);
+      {projects && (
+        <section className="project-list">
+          <h2>Projects</h2>
+          <div className="project-card-container">
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.uid}
+                projectData={project}
+                uid={project.uid}
+                techsUsed={project.techsUsed}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+      <p>
+        <Link href="/about">
+          <a>About</a>
+        </Link>
+      </p>
+    </Layout>
+  );
+};
 
 const client = Client();
 

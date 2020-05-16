@@ -7,12 +7,10 @@ const titleSuffix = "Portfolio";
 
 type Props = {
   title?: string;
-  preview?: boolean;
 };
 
 const Layout: React.FunctionComponent<Props> = ({
   children,
-  preview,
   title = "This is the default title",
 }) => (
   <div className="layout">
@@ -20,12 +18,16 @@ const Layout: React.FunctionComponent<Props> = ({
       {`
         .layout {
           display: flex;
-          font-family: Lato, sans-serif;
-          color: rgba(0, 0, 0, 0.87);
+          font-family: Muli, sans-serif;
+          color: rgba(0, 0, 0, 0.77);
           flex-direction: column;
           align-items: center;
           width: 100%;
           min-height: 100vh;
+        }
+
+        .layout :global(h1, h2, h3, h4, h5, h6) {
+          font-family: "Space Mono", monospace;
         }
 
         .grid-wrapper {
@@ -44,32 +46,11 @@ const Layout: React.FunctionComponent<Props> = ({
         }
       `}
     </style>
-    <style jsx global>{`
-      *,
-      ::before,
-      ::after {
-        box-sizing: border-box;
-      }
 
-      html {
-        font-size: max(calc((1vmin + 1vmax) / 4 + 0.75em), 1em);
-      }
-
-      body {
-        margin: 0;
-        padding: 0;
-      }
-    `}</style>
     <Head>
       <title>{title ? `${title} | ${titleSuffix}` : titleSuffix}</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
-        rel="stylesheet"
-      />
     </Head>
-    <Header preview={preview} />
+    <Header />
     <div className="grid-wrapper">
       <div />
       <main>{children}</main>

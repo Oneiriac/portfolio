@@ -11,6 +11,7 @@ import TechnologyList from "../../components/TechnologyList";
 import { Client } from "../../prismic-configuration";
 import { TechnologyData } from "../../interfaces";
 import { ProjectProps } from "../../interfaces/props";
+import { usePreview } from "../../components/PreviewContext";
 
 const projectColumnBasis = "15rem";
 
@@ -20,12 +21,13 @@ const Project: React.FunctionComponent<ProjectProps> = ({
   techsUsed,
   preview,
 }) => {
+  usePreview(preview);
   const projectName = projectData.name;
   const projectStart = dayjs(projectData.start_date).format("MMMM YYYY");
   const projectEnd = dayjs(projectData.end_date).format("MMMM YYYY");
 
   return (
-    <Layout title={projectName} preview={preview}>
+    <Layout title={projectName}>
       <style jsx>{`
         h1 {
           font-weight: 900;
