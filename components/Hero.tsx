@@ -10,11 +10,18 @@ const Hero: React.FunctionComponent = () => (
           background-color: #e16036;
           box-shadow: 0px -100px 5px 5px #e16036; /* Get the hero colour extending behind sticky header */
           color: #1c0f13;
-          padding: 1.5rem 0;
+          padding-bottom: 6vmin;
+          clip-path: polygon(
+            0 0,
+            100% 0,
+            100% calc(100% - 3vw),
+            0 100%
+          ); /* Triangle border */
         }
 
         h1 {
-          font-size: 3rem;
+          font-size: 4.5rem;
+          line-height: 1.2;
           font-weight: 900;
           margin-top: 0;
           margin-bottom: 1rem;
@@ -57,16 +64,15 @@ const Hero: React.FunctionComponent = () => (
         }
       `}
     </style>
-
     <ContentContainer>
       <h1>
         Hi, I'm Damon
         <span className="typing-indicator" />
       </h1>
       <div className="hero-description">
-        Software engineer,
+        Software engineer
         <br />
-        Web developer,
+        Web developer
         <br />
         Occasional linguist
       </div>
