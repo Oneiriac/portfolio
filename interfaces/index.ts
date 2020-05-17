@@ -6,6 +6,13 @@ export type ProjectData = {
   end_date: string;
   ongoing: boolean;
   technology_link: any[];
+  live_link: WebLink;
+  source_link: WebLink;
+  organisation: string;
+};
+
+type WebLink = {
+  url?: string;
 };
 
 export type AugmentedProjectData = ProjectData & {

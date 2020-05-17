@@ -14,7 +14,7 @@ import { TechnologyData } from "../../interfaces";
 import { ProjectProps } from "../../interfaces/props";
 import { usePreview } from "../../components/PreviewContext";
 import ContentContainer from "../../components/ContentContainer";
-import HeroTriangle from "../../components/HeroTriangle";
+import HeroContainer from "../../components/HeroContainer";
 
 const projectColumnBasis = "15rem";
 
@@ -24,7 +24,7 @@ const projectContentCss = css.resolve`
 
 const heroContentCss = css.resolve`
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `;
 
 const Project: React.FunctionComponent<ProjectProps> = ({
@@ -46,10 +46,6 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           margin-top: 0;
         }
 
-        em {
-          font-weight: 500;
-        }
-
         .project-flex {
           display: flex;
           flex-direction: row;
@@ -68,21 +64,29 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           display: flex;
           flex-direction: column;
         }
+
+        .project-basic-info {
+          font-weight: 500;
+          line-height: 2;
+        }
       `}</style>
       {heroContentCss.styles}
       {projectContentCss.styles}
 
-      <HeroTriangle
+      <HeroContainer
         contentClassName={heroContentCss.className}
         backgroundColorRgb={"var(--cool-light-color)"}
+        slant="right"
       >
         <h1>{projectName}</h1>
-        <div>
+        <div className="project-basic-info">
           <em>
+            {projectData.organisation}
+            <br />
             {projectStart}–{projectData.ongoing ? "Present" : projectEnd}
           </em>
         </div>
-      </HeroTriangle>
+      </HeroContainer>
       <ContentContainer className={projectContentCss.className}>
         <article id={`project-${uid}`}>
           <div className="project-flex">

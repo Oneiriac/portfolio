@@ -4,12 +4,14 @@ import ContentContainer from "./ContentContainer";
 interface Props {
   contentClassName?: string;
   backgroundColorRgb?: string;
+  slant?: "left" | "right";
 }
 
-const HeroTriangle: React.FunctionComponent<Props> = ({
+const HeroContainer: React.FunctionComponent<Props> = ({
   children,
   contentClassName,
   backgroundColorRgb = "var(--warm-mid-color)",
+  slant,
 }) => (
   <section className="hero-triangle">
     <style jsx>{`
@@ -19,6 +21,12 @@ const HeroTriangle: React.FunctionComponent<Props> = ({
 
       .hero-triangle-inner {
         background-color: rgba(${backgroundColorRgb}, 0.9);
+        clip-path: polygon(
+          0 0,
+          100% 0,
+          100% ${slant === "left" ? "calc(100% - 3vw)" : "100%"},
+          0 ${slant === "right" ? "calc(100% - 3vw)" : "100%"}
+        );
       }
     `}</style>
     <style jsx>
@@ -33,12 +41,6 @@ const HeroTriangle: React.FunctionComponent<Props> = ({
           padding-top: 1rem;
           color: rgb(var(--warm-dark-color));
           padding-bottom: 6vmin;
-          clip-path: polygon(
-            0 0,
-            100% 0,
-            100% calc(100% - 3vw),
-            0 100%
-          ); /* Triangle border */
         }
       `}
     </style>
@@ -50,4 +52,4 @@ const HeroTriangle: React.FunctionComponent<Props> = ({
   </section>
 );
 
-export default HeroTriangle;
+export default HeroContainer;

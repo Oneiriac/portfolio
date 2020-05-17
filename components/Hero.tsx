@@ -2,7 +2,7 @@ import * as React from "react";
 import TechnologyList from "./TechnologyList";
 import { TechnologyData } from "../interfaces";
 import FlexColumn from "./FlexColumn";
-import HeroTriangle from "./HeroTriangle";
+import HeroContainer from "./HeroContainer";
 import css from "styled-jsx/css";
 
 const heroColumnBasis = "12rem";
@@ -21,7 +21,7 @@ interface HeroProps {
 }
 
 const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
-  <HeroTriangle contentClassName={heroContentCss.className}>
+  <HeroContainer contentClassName={heroContentCss.className} slant="left">
     <style jsx>
       {`
         h1 {
@@ -115,7 +115,7 @@ const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
         <TechnologyList techsUsed={technologies} />
       </div>
     </FlexColumn>
-  </HeroTriangle>
+  </HeroContainer>
 );
 
 export default Hero;
