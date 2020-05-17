@@ -24,7 +24,7 @@ const Layout: React.FunctionComponent<Props> = ({
           align-items: center;
           width: 100%;
           min-height: 100vh;
-          background-color: honeydew;
+          background-color: #f0f8ea;
           position: relative;
         }
 

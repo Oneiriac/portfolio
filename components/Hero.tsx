@@ -96,6 +96,7 @@ const Hero: React.FunctionComponent = () => (
 
         .hero-description {
           font-size: 1.5rem;
+          font-weight: 700;
           line-height: 1.5;
           opacity: 0.8;
         }

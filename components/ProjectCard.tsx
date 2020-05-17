@@ -18,10 +18,10 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
-            0 15px 40px rgba(67, 107, 227, 0.2);
-          background-color: rgba(67, 107, 227, 0.65);
-          color: #34384d;
+          box-shadow: 2px 5px 2px rgba(47, 47, 62, 0.3),
+            2px 10px 5px rgba(67, 107, 227, 0.2);
+          background-color: rgba(13, 59, 102, 0.9);
+          color: #f0f8ea;
           padding: 1.5rem;
           height: 100%;
           transition: background-color 0.35s;
@@ -41,7 +41,7 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
         .project-card:hover,
         .project-card:focus,
         .project-card:active {
-          background-color: rgba(67, 107, 227, 1);
+          background-color: rgba(13, 59, 102, 1);
           color: #dedede;
         }
 
