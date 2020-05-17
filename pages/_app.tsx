@@ -26,6 +26,10 @@ const MyApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => {
           href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600;700;800;900&display=swap"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <Component {...pageProps} />
     </PreviewProvider>

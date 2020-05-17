@@ -18,6 +18,8 @@ const Header: React.FunctionComponent<Props> = () => (
         line-height: 1.5;
         background-color: #1c0f13;
         padding: 0.75rem 1rem;
+        box-shadow: 0px 2px 5px 0px rgba(28, 15, 19, 0.6),
+          0px 6px 5px 0px rgba(0, 0, 0, 0.4);
       }
 
       a {
