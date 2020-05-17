@@ -99,6 +99,17 @@ export const getStaticProps: GetStaticProps = async ({
     return result;
   }, []);
 
+  projects.sort((projA, projB) => {
+    // Primary criterion is ongoing status
+    if (projA.ongoing && !projB.ongoing) return -1;
+    if (!projA.ongoing && projB.ongoing) return 1;
+    // Both are ongoing, use start_date as secondary criterion
+    if (projA.start_date > projB.start_date) return -1;
+    if (projA.start_date < projB.start_date) return 1;
+    // Both ongoing and both started on same date
+    return 0;
+  });
+
   if (Object.keys(projects).length)
     return {
       props: { preview, projects, technologies: Object.values(technologies) },
