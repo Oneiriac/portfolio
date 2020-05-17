@@ -2,15 +2,15 @@ import * as React from "react";
 import ContentContainer from "./ContentContainer";
 
 interface Props {
+  backgroundColorRgb: string;
   contentClassName?: string;
-  backgroundColorRgb?: string;
   slant?: "left" | "right";
 }
 
 const HeroContainer: React.FunctionComponent<Props> = ({
   children,
   contentClassName,
-  backgroundColorRgb = "var(--warm-mid-color)",
+  backgroundColorRgb,
   slant,
 }) => (
   <section className="hero-triangle">

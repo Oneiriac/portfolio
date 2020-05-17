@@ -23,9 +23,6 @@ const TechnologyList: React.FunctionComponent<Props> = ({
         .tech-item {
           display: inline-flex;
           align-items: center;
-          line-height: 3;
-          font-size: 1.1rem;
-          font-weight: 600;
         }
 
         .tech-item > * {

@@ -21,7 +21,11 @@ interface HeroProps {
 }
 
 const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
-  <HeroContainer contentClassName={heroContentCss.className} slant="left">
+  <HeroContainer
+    backgroundColorRgb={"var(--warm-mid-color)"}
+    contentClassName={heroContentCss.className}
+    slant="left"
+  >
     <style jsx>
       {`
         h1 {
@@ -79,6 +83,12 @@ const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
             calc(0.6 * ${heroColumnBasis})
           );
           column-gap: 2rem;
+          row-gap: 0.75rem;
+        }
+
+        .hero-tech-list :global(*) {
+          line-height: 1.5;
+          font-weight: 600;
         }
 
         :global(.hero-personal) {

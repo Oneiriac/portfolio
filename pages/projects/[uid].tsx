@@ -65,6 +65,10 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           flex-direction: column;
         }
 
+        & :global(.project-tech-used span) {
+          margin: 0.15rem 0;
+        }
+
         .project-basic-info {
           font-weight: 500;
           line-height: 2;
