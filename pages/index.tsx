@@ -38,7 +38,7 @@ const IndexPage: React.FunctionComponent<Props> = ({
       <Hero technologies={technologies} />
       <ContentContainer>
         {projects && (
-          <section className="project-list">
+          <section id="projects" className="project-list">
             <h2>Projects</h2>
             <div className="project-card-container">
               {projects.map((project) => (

@@ -73,11 +73,7 @@ const Header: React.FunctionComponent<Props> = () => (
       </Link>
     </div>
     <nav>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-      <span className="divider" />
-      <Link href="/projects">
+      <Link href="/#projects">
         <a>Projects</a>
       </Link>
       <PreviewContext.Consumer>
