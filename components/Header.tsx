@@ -18,18 +18,18 @@ const Header: React.FunctionComponent<Props> = () => (
         line-height: 1.5;
         background-color: rgb(var(--warm-dark-color));
         padding: 0.75rem 1rem;
-        box-shadow: 0px 2px 5px 0px rgba(var(--warm-dark-color), 0.6),
-          0px 6px 5px 0px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 2px 5px 0 rgba(var(--warm-dark-color), 0.6),
+          0 6px 5px 0 rgba(0, 0, 0, 0.4);
       }
 
       a {
         text-decoration: none;
-        color: rgba(var(--cool-light-color), 1);
-        transition: color 0.35s;
+        color: rgba(var(--warm-light-color), 1);
+        transition: opacity 0.35s;
       }
 
       a:hover {
-        color: rgba(var(--cool-light-color), 0.6);
+        opacity: 0.6;
       }
 
       nav {

@@ -14,13 +14,17 @@ import { TechnologyData } from "../../interfaces";
 import { ProjectProps } from "../../interfaces/props";
 import { usePreview } from "../../components/PreviewContext";
 import ContentContainer from "../../components/ContentContainer";
+import HeroTriangle from "../../components/HeroTriangle";
 
 const projectColumnBasis = "15rem";
 
-const containerStyles = css.resolve`
-  & {
-    margin-top: 1rem;
-  }
+const projectContentCss = css.resolve`
+  margin-top: 1rem;
+`;
+
+const heroContentCss = css.resolve`
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `;
 
 const Project: React.FunctionComponent<ProjectProps> = ({
@@ -39,6 +43,11 @@ const Project: React.FunctionComponent<ProjectProps> = ({
       <style jsx>{`
         h1 {
           font-weight: 900;
+          margin-top: 0;
+        }
+
+        em {
+          font-weight: 500;
         }
 
         .project-flex {
@@ -47,52 +56,58 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           flex-wrap: wrap;
           /* Once column-gap is widely supported switch to it: until then, use negative margin hack */
           /* column-gap: 2rem; */
-          margin-right: -3rem;
+          margin-right: -1rem;
           line-height: 1.5;
         }
 
         .project-flex > :global(*) {
-          margin-right: 3rem; /* Keep this the same as ContentContainer gutter width */
+          margin-right: 1rem; /* Keep this the same as ContentContainer gutter width */
+        }
+
+        & :global(.project-tech-used) {
+          display: flex;
+          flex-direction: column;
         }
       `}</style>
-      {containerStyles.styles}
-      <ContentContainer
-        containerProps={{ className: containerStyles.className }}
+      {heroContentCss.styles}
+      {projectContentCss.styles}
+
+      <HeroTriangle
+        contentClassName={heroContentCss.className}
+        backgroundColorRgb={"var(--cool-light-color)"}
       >
-        {projectData && (
-          <article id={`project-${uid}`}>
-            <section className="project-hero">
-              <h1>{projectName}</h1>
-              <div>
-                <em>
-                  {projectStart}–{projectData.ongoing ? "Present" : projectEnd}
-                </em>
-              </div>
-            </section>
-            <div className="project-flex">
-              <FlexColumn
-                as="section"
-                className="project-details"
-                columnBasis={projectColumnBasis}
-                columnSpan={2}
-              >
-                <section className="project-description">
-                  <h3>Project description</h3>
-                  <RichText render={projectData.description} />
-                </section>
-              </FlexColumn>
-              <FlexColumn
-                as="aside"
-                className="project-tech-used"
-                columnBasis={projectColumnBasis}
-                columnSpan={1}
-              >
-                <h3>Technologies used</h3>
-                <TechnologyList techsUsed={techsUsed} />
-              </FlexColumn>
-            </div>
-          </article>
-        )}
+        <h1>{projectName}</h1>
+        <div>
+          <em>
+            {projectStart}–{projectData.ongoing ? "Present" : projectEnd}
+          </em>
+        </div>
+      </HeroTriangle>
+      <ContentContainer className={projectContentCss.className}>
+        <article id={`project-${uid}`}>
+          <div className="project-flex">
+            <FlexColumn
+              as="section"
+              className="project-details"
+              columnBasis={projectColumnBasis}
+              columnSpan={2}
+            >
+              <section className="project-description">
+                <h3>Project description</h3>
+                <RichText render={projectData.description} />
+              </section>
+            </FlexColumn>
+            <FlexColumn
+              as="aside"
+              className="project-tech-used"
+              columnBasis={projectColumnBasis}
+              columnSpan={1}
+            >
+              <h3>Technologies used</h3>
+              <TechnologyList techsUsed={techsUsed} />
+            </FlexColumn>
+          </div>
+        </article>
       </ContentContainer>
     </Layout>
   );

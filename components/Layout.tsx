@@ -24,7 +24,7 @@ const Layout: React.FunctionComponent<Props> = ({
           align-items: center;
           width: 100%;
           min-height: 100vh;
-          background-color: #f0f8ea;
+          background-color: rgb(var(--warm-light-color));
           position: relative;
         }
 
@@ -37,6 +37,9 @@ const Layout: React.FunctionComponent<Props> = ({
           flex-shrink: 0;
           width: 100%;
           padding-bottom: 3rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
         }
       `}
     </style>

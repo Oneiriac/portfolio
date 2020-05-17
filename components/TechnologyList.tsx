@@ -21,24 +21,32 @@ const TechnologyList: React.FunctionComponent<Props> = ({
       `}</style>
       <style jsx>{`
         .tech-item {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          line-height: 2;
+          line-height: 3;
+          font-size: 1.1rem;
+          font-weight: 600;
         }
 
         .tech-item > * {
-          margin-right: 0.75rem;
+          margin-right: 0.5rem;
         }
 
         .icon-container {
-          width: 1.5rem;
-          margin-right: 0.75rem;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 2.5rem;
+          height: 2.5rem;
+          padding: 0.6rem;
+          border-radius: 100%;
+          background-color: rgba(var(--cool-dark-color), 0.5);
+          text-align: center;
         }
 
-        .tech-item img {
-          margin: 0 auto;
+        .icon-container img {
           object-fit: contain;
-          height: 1.3rem;
         }
       `}</style>
 
