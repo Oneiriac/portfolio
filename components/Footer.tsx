@@ -5,6 +5,8 @@ const Footer: React.FunctionComponent = () => (
     <style jsx>{`
       footer {
         height: 3rem;
+        position: absolute;
+        bottom: 0;
         width: 100%;
         font-size: 0.75rem;
         opacity: 0.75;
@@ -14,7 +16,6 @@ const Footer: React.FunctionComponent = () => (
         align-items: center;
       }
       span {
-        padding: 0 1rem;
         margin: 0.5rem 0;
       }
     `}</style>

@@ -36,6 +36,7 @@ const Layout: React.FunctionComponent<Props> = ({
           flex-grow: 1;
           flex-shrink: 0;
           width: 100%;
+          padding-bottom: 3rem;
         }
       `}
     </style>

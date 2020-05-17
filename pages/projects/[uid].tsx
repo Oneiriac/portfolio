@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { RichText } from "prismic-reactjs";
 import { Predicates } from "prismic-javascript";
 import dayjs from "dayjs";
+import css from "styled-jsx/css";
 
 import Layout from "../../components/Layout";
 import FlexColumn from "../../components/FlexColumn";
@@ -15,6 +16,12 @@ import { usePreview } from "../../components/PreviewContext";
 import ContentContainer from "../../components/ContentContainer";
 
 const projectColumnBasis = "15rem";
+
+const containerStyles = css.resolve`
+  & {
+    margin-top: 1rem;
+  }
+`;
 
 const Project: React.FunctionComponent<ProjectProps> = ({
   projectData,
@@ -45,10 +52,13 @@ const Project: React.FunctionComponent<ProjectProps> = ({
         }
 
         .project-flex > :global(*) {
-          margin-right: 3rem;
+          margin-right: 3rem; /* Keep this the same as ContentContainer gutter width */
         }
       `}</style>
-      <ContentContainer>
+      {containerStyles.styles}
+      <ContentContainer
+        containerProps={{ className: containerStyles.className }}
+      >
         {projectData && (
           <article id={`project-${uid}`}>
             <section className="project-hero">

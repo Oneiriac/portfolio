@@ -1,24 +1,43 @@
 import * as React from "react";
 
-const ContentContainer: React.FunctionComponent = ({ children }) => (
-  <div className="content-grid">
+type Props = {
+  gridProps?: React.HTMLAttributes<any>;
+  containerProps?: React.HTMLAttributes<any>;
+};
+
+const ContentContainer: React.FunctionComponent<Props> = ({
+  children,
+  gridProps: { className: gridClassName, ...restGridProps } = {},
+  containerProps: { className: containerClassName, ...restContainerProps } = {},
+}) => (
+  <div
+    className={`content-grid${gridClassName ? ` ${gridClassName}` : ""}`}
+    {...restGridProps}
+  >
     <style jsx>{`
       .content-grid {
         width: 100%;
         display: grid;
-        grid-template-columns: minmax(1.2rem, 1fr) minmax(0, 4fr) minmax(
-            1.2rem,
+        grid-template-columns: minmax(3rem, 1fr) minmax(0, 6fr) minmax(
+            3rem,
             1fr
           );
         flex-grow: 1;
       }
 
       .content-container {
-        padding: 2rem 0;
+        padding: 1rem 0;
       }
     `}</style>
     <div />
-    <div className="content-container">{children}</div>
+    <div
+      className={`content-container${
+        containerClassName ? ` ${containerClassName}` : ""
+      }`}
+      {...restContainerProps}
+    >
+      {children}
+    </div>
     <div />
   </div>
 );
