@@ -81,12 +81,15 @@ const Project: React.FunctionComponent<ProjectProps> = ({
                   <RichText render={projectData.description} />
                 </section>
               </FlexColumn>
-              <TechnologyList
+              <FlexColumn
                 as="aside"
-                techsUsed={techsUsed}
+                className="project-tech-used"
                 columnBasis={projectColumnBasis}
                 columnSpan={1}
-              />
+              >
+                <h3>Technologies used</h3>
+                <TechnologyList techsUsed={techsUsed} />
+              </FlexColumn>
             </div>
           </article>
         )}

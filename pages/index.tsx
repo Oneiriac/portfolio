@@ -14,9 +14,14 @@ type ProjectsIndex = AugmentedProjectData[];
 interface Props {
   projects?: ProjectsIndex;
   preview?: boolean;
+  technologies: TechnologyData[];
 }
 
-const IndexPage: React.FunctionComponent<Props> = ({ projects, preview }) => {
+const IndexPage: React.FunctionComponent<Props> = ({
+  projects,
+  preview,
+  technologies,
+}) => {
   usePreview(preview);
 
   return (
@@ -30,7 +35,7 @@ const IndexPage: React.FunctionComponent<Props> = ({ projects, preview }) => {
         }
       `}</style>
 
-      <Hero />
+      <Hero technologies={technologies} />
       <ContentContainer>
         {projects && (
           <section className="project-list">
@@ -94,7 +99,10 @@ export const getStaticProps: GetStaticProps = async ({
     return result;
   }, []);
 
-  if (Object.keys(projects).length) return { props: { preview, projects } };
+  if (Object.keys(projects).length)
+    return {
+      props: { preview, projects, technologies: Object.values(technologies) },
+    };
   else return { props: { preview } };
 };
 

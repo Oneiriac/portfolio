@@ -1,33 +1,33 @@
 import * as React from "react";
 import { TechnologyData } from "../interfaces";
-import FlexColumn, { FlexColumnProps } from "./FlexColumn";
-import css from "styled-jsx/css";
 
-interface Props extends FlexColumnProps {
+interface Props {
   techsUsed: TechnologyData[];
+  iconFirst?: boolean;
 }
-
-// Apply these styles to the flex column directly
-const { className: techListClassName, styles: techListStyles } = css.resolve`
-  .tech-list {
-    display: flex;
-    flex-direction: column;
-  }
-`;
 
 const TechnologyList: React.FunctionComponent<Props> = ({
   techsUsed,
-  ...props
+  iconFirst = true,
 }) =>
   Array.isArray(techsUsed) && techsUsed.length > 0 ? (
-    <FlexColumn className={`tech-list ${techListClassName}`} {...props}>
-      {techListStyles}
+    <>
       <style jsx>{`
-        span {
+        /* Separate out the dynamic style */
+        .tech-item {
+          flex-direction: ${iconFirst ? "row" : "row-reverse"};
+          justify-content: ${iconFirst ? "flex-start" : "flex-end"};
+        }
+      `}</style>
+      <style jsx>{`
+        .tech-item {
           display: flex;
-          flex-direction: row;
           align-items: center;
           line-height: 2;
+        }
+
+        .tech-item > * {
+          margin-right: 0.75rem;
         }
 
         .icon-container {
@@ -35,23 +35,22 @@ const TechnologyList: React.FunctionComponent<Props> = ({
           margin-right: 0.75rem;
         }
 
-        span img {
+        .tech-item img {
           margin: 0 auto;
           object-fit: contain;
           height: 1.3rem;
         }
       `}</style>
 
-      <h3>Technologies used</h3>
       {techsUsed.map((tech) => (
-        <span key={tech.name}>
+        <span className="tech-item" key={tech.name}>
           <span className="icon-container">
             <img src={tech.icon.url} alt={tech.icon.alt ?? undefined} />
           </span>
-          {tech.name}
+          <span className="tech-name">{tech.name}</span>
         </span>
       ))}
-    </FlexColumn>
+    </>
   ) : null;
 
 export default TechnologyList;

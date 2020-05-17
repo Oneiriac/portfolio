@@ -16,20 +16,20 @@ const Header: React.FunctionComponent<Props> = () => (
         opacity: 0.95;
         width: 100%;
         line-height: 1.5;
-        background-color: #1c0f13;
+        background-color: rgb(var(--warm-dark-color));
         padding: 0.75rem 1rem;
-        box-shadow: 0px 2px 5px 0px rgba(28, 15, 19, 0.6),
+        box-shadow: 0px 2px 5px 0px rgba(var(--warm-dark-color), 0.6),
           0px 6px 5px 0px rgba(0, 0, 0, 0.4);
       }
 
       a {
         text-decoration: none;
-        color: #f0f8ea;
+        color: rgba(var(--cool-light-color), 1);
         transition: color 0.35s;
       }
 
       a:hover {
-        color: #bcbcbc;
+        color: rgba(var(--cool-light-color), 0.6);
       }
 
       nav {
@@ -43,6 +43,7 @@ const Header: React.FunctionComponent<Props> = () => (
 
       nav a {
         font-variant: all-small-caps;
+        font-weight: 600;
       }
 
       .my-name {
@@ -62,7 +63,7 @@ const Header: React.FunctionComponent<Props> = () => (
 
       .divider::before {
         content: "/";
-        color: #efefef;
+        color: rgb(var(--cool-light-color));
       }
     `}</style>
 

@@ -1,13 +1,44 @@
 import * as React from "react";
 import ContentContainer from "./ContentContainer";
+import TechnologyList from "./TechnologyList";
+import css from "styled-jsx/css";
+import { TechnologyData } from "../interfaces";
+import FlexColumn from "./FlexColumn";
 
-const Hero: React.FunctionComponent = () => (
+const heroContentCss = css.resolve`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+`;
+
+const heroGridCss = css.resolve`
+  width: 100%;
+  background-color: rgb(var(--warm-mid-color));
+  color: rgb(var(--warm-dark-color));
+  padding-top: 1rem;
+  padding-bottom: 6vmin;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 3vw),
+    0 100%
+  ); /* Triangle border */
+`;
+
+const heroColumnBasis = "12rem";
+
+interface HeroProps {
+  technologies: TechnologyData[];
+}
+
+const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
   <section className="hero">
     <style jsx>
       {`
         .hero {
           width: 100%;
-          box-shadow: 0px -100px 5px 5px #e16036; /* Get the hero colour extending behind sticky header */
+          box-shadow: 0px -100px 5px 5px rgb(var(--warm-mid-color)); /* Get the hero colour extending behind sticky header */
           filter: drop-shadow(0 2px 5px rgba(163, 71, 40, 0.7));
         }
 
@@ -16,20 +47,9 @@ const Hero: React.FunctionComponent = () => (
         }
 
         .hero-inner {
-          width: 100%;
-          background-color: #e16036;
-          color: #1c0f13;
-          padding-top: 1rem;
-          padding-bottom: 6vmin;
-          clip-path: polygon(
-            0 0,
-            100% 0,
-            100% calc(100% - 3vw),
-            0 100%
-          ); /* Triangle border */
         }
 
-        .hero-intro {
+        h1 {
           font-size: 3.5rem;
           line-height: 1.1;
           font-weight: 900;
@@ -37,85 +57,75 @@ const Hero: React.FunctionComponent = () => (
           margin-bottom: 1rem;
         }
 
-        .swap-text {
-          display: inline-block;
-          position: relative;
-        }
-
-        .swap-text,
-        .swap-text::before {
-          width: 100%;
-          transition: color 0.7s, transform 0.5s;
-        }
-
-        .swap-text::before {
-          font-family: "Inter", sans-serif;
+        .ipa-text {
+          content: attr(data-ipa-text);
+          animation: fadein 2s ease-in-out;
+          opacity: 0.4;
+          font-family: Inter, sans-serif;
           font-weight: 700;
-          content: attr(data-swap-text);
-          position: absolute;
-          top: 0;
-          left: 0;
-          /* transform: translate(-50%, 0); */
-          color: rgba(0, 0, 0, 0);
+          transition: opacity 0.35s;
+          user-select: text;
         }
 
-        .hero-intro:hover .swap-text,
-        .hero-intro:active .swap-text,
-        .hero-intro:focus .swap-text {
-          color: rgba(0, 0, 0, 0);
+        .ipa-text:hover {
+          opacity: 1;
         }
 
-        .hero-intro:hover .swap-text::before,
-        .hero-intro:active .swap-text::before,
-        .hero-intro:focus .swap-text::before {
-          /* transform: translate(0, 0); */
-          color: #1c0f13;
-        }
-
-        /* 
-        h1::before {
-          content: "$ ";
-        }
-
-        h1::after {
-          content: "_";
-          animation: blink-caret 0.9s step-end infinite;
-          color: orange;
-        }
-        
-        @keyframes blink-caret {
-          from,
-          to {
-            color: transparent;
+        @keyframes fadein {
+          0% {
+            opacity: 0;
           }
-          50% {
-            color: orange;
+
+          100% {
+            opacity: 0.4;
           }
         }
-         */
 
         .hero-description {
           font-size: 1.5rem;
           font-weight: 700;
           line-height: 1.5;
-          opacity: 0.8;
+          margin-bottom: 0.5rem;
+          opacity: 0.9;
         }
 
         .location-text {
           opacity: 0.7;
+          font-weight: 500;
         }
 
         .location-emoji {
           font-size: 2rem;
         }
+
+        .hero-tech-list {
+          display: grid;
+          grid-template-columns: repeat(
+            auto-fill,
+            calc(0.7 * ${heroColumnBasis})
+          );
+          column-gap: 2rem;
+        }
+
+        :global(.hero-personal) {
+          margin-right: 3rem;
+        }
       `}
     </style>
-    <div className="hero-inner">
-      <ContentContainer>
-        <h1 className="hero-intro" tabIndex={-1}>
-          <span className="swap-text" data-swap-text={"haɪ | aɪm deɪmən"}>
-            Hi, I'm Damon
-          </span>
+    {heroContentCss.styles}
+    {heroGridCss.styles}
+    <ContentContainer
+      containerProps={{ className: heroContentCss.className }}
+      gridProps={{ className: heroGridCss.className }}
+    >
+      <FlexColumn
+        className="hero-personal"
+        as="section"
+        columnBasis={heroColumnBasis}
+        columnSpan={2}
+      >
+        <h1 className="hero-intro">
+          Hi, I'm <br /> Damon <span className="ipa-text">/deɪmən/</span>
         </h1>
         <div className="hero-description">
           Software engineer
@@ -124,13 +134,19 @@ const Hero: React.FunctionComponent = () => (
           <br />
           Occasional linguist
         </div>
-        <br />
         <div className="location">
           <em className="location-text">Melbourne, Australia </em>&nbsp;
           <span className="location-emoji">☕</span>
         </div>
-      </ContentContainer>
-    </div>
+      </FlexColumn>
+      <FlexColumn as="aside" columnBasis={heroColumnBasis} columnSpan={1}>
+        {" "}
+        <h2>Tech I use</h2>
+        <div className="hero-tech-list">
+          <TechnologyList techsUsed={technologies} />
+        </div>
+      </FlexColumn>
+    </ContentContainer>
   </section>
 );
 

@@ -29,7 +29,7 @@ const ContentContainer: React.FunctionComponent<Props> = ({
         padding: 1rem 0;
       }
     `}</style>
-    <div />
+    <div className="gutter-left" />
     <div
       className={`content-container${
         containerClassName ? ` ${containerClassName}` : ""
@@ -38,7 +38,7 @@ const ContentContainer: React.FunctionComponent<Props> = ({
     >
       {children}
     </div>
-    <div />
+    <div className="gutter-right" />
   </div>
 );
 

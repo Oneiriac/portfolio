@@ -3,6 +3,14 @@ html {
   font-size: max(calc((1vmin + 1vmax) / 4 + 0.75em), 1em);
 }
 
+:root {
+  --warm-dark-color: 28, 15, 19;
+  --cool-dark-color: 13, 59, 102;
+  --warm-mid-color: 225, 96, 54;
+  --cool-light-color: 240, 248, 234;
+  --cool-warm-color: 250, 240, 202;
+}
+
 body {
   margin: 0;
   padding: 0;
