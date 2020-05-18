@@ -6,7 +6,6 @@ import dayjs from "dayjs";
 import css from "styled-jsx/css";
 
 import Layout from "../../components/Layout";
-import FlexColumn from "../../components/FlexColumn";
 import TechnologyList from "../../components/TechnologyList";
 
 import { Client } from "../../prismic-configuration";
@@ -15,8 +14,6 @@ import { ProjectProps } from "../../interfaces/props";
 import { usePreview } from "../../components/PreviewContext";
 import ContentContainer from "../../components/ContentContainer";
 import HeroContainer from "../../components/HeroContainer";
-
-const projectColumnBasis = "15rem";
 
 const projectContentCss = css.resolve`
   margin-top: 1rem;
@@ -47,31 +44,24 @@ const Project: React.FunctionComponent<ProjectProps> = ({
         }
 
         .project-flex {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          /* Once column-gap is widely supported switch to it: until then, use negative margin hack */
-          /* column-gap: 2rem; */
-          margin-right: -1rem;
-          line-height: 1.5;
-        }
-
-        .project-flex > :global(*) {
-          margin-right: 1rem; /* Keep this the same as ContentContainer gutter width */
-        }
-
-        & :global(.project-tech-used) {
-          display: flex;
-          flex-direction: column;
-        }
-
-        & :global(.project-tech-used span) {
-          margin: 0.15rem 0;
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+          column-gap: 2rem;
+          line-height: 1.75;
         }
 
         .project-basic-info {
           font-weight: 500;
           line-height: 2;
+        }
+
+        .project-tech-list {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .project-tech-list > :global(span) {
+          line-height: 3;
         }
       `}</style>
       {heroContentCss.styles}
@@ -91,30 +81,19 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           </em>
         </div>
       </HeroContainer>
-      <ContentContainer className={projectContentCss.className}>
-        <article id={`project-${uid}`}>
-          <div className="project-flex">
-            <FlexColumn
-              as="section"
-              className="project-details"
-              columnBasis={projectColumnBasis}
-              columnSpan={2}
-            >
-              <section className="project-description">
-                <h3>Project description</h3>
-                <RichText render={projectData.description} />
-              </section>
-            </FlexColumn>
-            <FlexColumn
-              as="aside"
-              className="project-tech-used"
-              columnBasis={projectColumnBasis}
-              columnSpan={1}
-            >
-              <h3>Technologies used</h3>
-              <TechnologyList techsUsed={techsUsed} />
-            </FlexColumn>
-          </div>
+      <ContentContainer as="section" className={projectContentCss.className}>
+        <article id={`project-${uid}`} className="project-flex">
+          <section className="project-description">
+            <h3>Project description</h3>
+            <RichText render={projectData.description} />
+          </section>
+          <aside className="project-tech-list">
+            <h3>Technologies used</h3>
+            <TechnologyList
+              techsUsed={techsUsed}
+              backgroundColorRgb={"var(--cool-dark-color)"}
+            />
+          </aside>
         </article>
       </ContentContainer>
     </Layout>

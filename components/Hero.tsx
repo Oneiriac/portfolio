@@ -5,7 +5,7 @@ import FlexColumn from "./FlexColumn";
 import HeroContainer from "./HeroContainer";
 import css from "styled-jsx/css";
 
-const heroColumnBasis = "12rem";
+const heroColumnBasis = "15rem";
 
 const heroContentCss = css.resolve`
   display: flex;
@@ -38,8 +38,8 @@ const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
 
         .ipa-text {
           content: attr(data-ipa-text);
-          animation: fadein 2s ease-in-out;
-          opacity: 0.4;
+          animation: fadein 4s ease-in-out;
+          opacity: 0.6;
           font-family: Inter, sans-serif;
           font-weight: 700;
           transition: opacity 0.35s;
@@ -56,7 +56,7 @@ const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
           }
 
           100% {
-            opacity: 0.4;
+            opacity: 0.6;
           }
         }
 
@@ -80,7 +80,7 @@ const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
           display: grid;
           grid-template-columns: repeat(
             auto-fill,
-            calc(0.6 * ${heroColumnBasis})
+            minmax(calc(0.5 * ${heroColumnBasis}), 1fr)
           );
           column-gap: 2rem;
           row-gap: 0.75rem;
@@ -122,7 +122,10 @@ const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
     <FlexColumn as="aside" columnBasis={heroColumnBasis} columnSpan={1}>
       <h2>Some tech I use</h2>
       <div className="hero-tech-list">
-        <TechnologyList techsUsed={technologies} />
+        <TechnologyList
+          techsUsed={technologies}
+          backgroundColorRgb={"var(--cool-dark-color)"}
+        />
       </div>
     </FlexColumn>
   </HeroContainer>

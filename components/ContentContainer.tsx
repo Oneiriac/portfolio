@@ -1,14 +1,15 @@
 import * as React from "react";
 
-const ContentContainer: React.FunctionComponent<React.HTMLAttributes<any>> = ({
+interface Props extends React.HTMLAttributes<any> {
+  as?: keyof React.ReactHTML | React.FunctionComponent | React.ComponentClass;
+}
+
+const ContentContainer: React.FunctionComponent<Props> = ({
+  as: Component = "div",
   children,
-  className,
   ...props
 }) => (
-  <div
-    className={"content-container" + (className ? ` ${className}` : "")}
-    {...props}
-  >
+  <Component {...props}>
     <style jsx>{`
       & {
         padding: 0 1rem;
@@ -18,7 +19,7 @@ const ContentContainer: React.FunctionComponent<React.HTMLAttributes<any>> = ({
       }
     `}</style>
     {children}
-  </div>
+  </Component>
 );
 
 export default ContentContainer;

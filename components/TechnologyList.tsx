@@ -1,14 +1,17 @@
 import * as React from "react";
 import { TechnologyData } from "../interfaces";
+import TechnologyIcon from "./TechnologyIcon";
 
 interface Props {
   techsUsed: TechnologyData[];
   iconFirst?: boolean;
+  backgroundColorRgb?: string;
 }
 
 const TechnologyList: React.FunctionComponent<Props> = ({
   techsUsed,
   iconFirst = true,
+  backgroundColorRgb = "var(--cool-dark-color)",
 }) =>
   Array.isArray(techsUsed) && techsUsed.length > 0 ? (
     <>
@@ -25,33 +28,17 @@ const TechnologyList: React.FunctionComponent<Props> = ({
           align-items: center;
         }
 
-        .tech-item > * {
+        .tech-item > :global(*) {
           margin-right: 0.5rem;
-        }
-
-        .icon-container {
-          flex-shrink: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 2.5rem;
-          height: 2.5rem;
-          padding: 0.6rem;
-          border-radius: 100%;
-          background-color: rgba(var(--cool-dark-color), 0.5);
-          text-align: center;
-        }
-
-        .icon-container img {
-          object-fit: contain;
         }
       `}</style>
 
       {techsUsed.map((tech) => (
         <span className="tech-item" key={tech.name}>
-          <span className="icon-container">
-            <img src={tech.icon.url} alt={tech.icon.alt ?? undefined} />
-          </span>
+          <TechnologyIcon
+            technology={tech}
+            backgroundColorRgb={backgroundColorRgb}
+          />
           <span className="tech-name">{tech.name}</span>
         </span>
       ))}

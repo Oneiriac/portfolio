@@ -16,11 +16,11 @@ const HeroContainer: React.FunctionComponent<Props> = ({
   <section className="hero-triangle">
     <style jsx>{`
       .hero-triangle {
-        box-shadow: 0px -10rem 5px 5px rgba(${backgroundColorRgb}, 0.9); /* Get the hero colour extending behind sticky header */
+        box-shadow: 0px -10rem 5px 5px rgba(${backgroundColorRgb}, 1); /* Get the hero colour extending behind sticky header */
       }
 
       .hero-triangle-inner {
-        background-color: rgba(${backgroundColorRgb}, 0.9);
+        background-color: rgba(${backgroundColorRgb}, 1);
         clip-path: polygon(
           0 0,
           100% 0,
