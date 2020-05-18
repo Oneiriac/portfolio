@@ -2,6 +2,7 @@ import * as React from "react";
 import Head from "next/head";
 import Footer from "./Footer";
 import Header from "./Header";
+import { FOOTER_HEIGHT } from "./constants";
 
 const titleSuffix = "Portfolio";
 
@@ -19,7 +20,7 @@ const Layout: React.FunctionComponent<Props> = ({
         .layout {
           display: flex;
           font-family: Muli, sans-serif;
-          color: rgba(0, 0, 0, 0.77);
+          color: rgb(var(--warm-dark-color));
           flex-direction: column;
           align-items: center;
           width: 100%;
@@ -36,7 +37,7 @@ const Layout: React.FunctionComponent<Props> = ({
           flex-grow: 1;
           flex-shrink: 0;
           width: 100%;
-          padding-bottom: 3rem;
+          padding-bottom: ${FOOTER_HEIGHT};
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
