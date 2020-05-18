@@ -27,13 +27,13 @@ const TechnologyIcon: React.FunctionComponent<Props> = ({
         justify-content: center;
         width: 2.5rem;
         height: 2.5rem;
-        padding: 0.6rem;
         border-radius: 100%;
         text-align: center;
       }
 
       .icon-container img {
-        object-fit: contain;
+        max-height: 1.5rem;
+        max-width: 1.5rem;
       }
     `}</style>
 
