@@ -37,17 +37,24 @@ const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
         }
 
         .ipa-text {
+          display: inline-block;
           content: attr(data-ipa-text);
           animation: fadein 4s ease-in-out;
           opacity: 0.6;
           font-family: Inter, sans-serif;
           font-weight: 700;
-          transition: opacity 0.35s;
-          user-select: text;
+          transition: opacity 0.35s, transform 0.35s;
+          outline: none;
         }
 
         .ipa-text:hover {
           opacity: 1;
+          transform: scale(1.05);
+        }
+
+        .ipa-text:focus,
+        .ipa-text:active {
+          transform: scale(0.9);
         }
 
         @keyframes fadein {
@@ -105,7 +112,10 @@ const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
       columnSpan={2}
     >
       <h1 className="hero-intro">
-        Hi, I'm <br /> Damon <span className="ipa-text">/deɪmən/</span>
+        Hi, I'm <br /> Damon{" "}
+        <span className="ipa-text" tabIndex={-1}>
+          /deɪmən/
+        </span>
       </h1>
       <div className="hero-description">
         Software engineer

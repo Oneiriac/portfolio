@@ -36,22 +36,19 @@ const IndexPage: React.FunctionComponent<Props> = ({
       `}</style>
 
       <Hero technologies={technologies} />
-      <ContentContainer>
-        {projects && (
-          <section id="projects" className="project-list">
-            <h2>Projects</h2>
-            <div className="project-card-container">
-              {projects.map((project) => (
-                <ProjectCard
-                  key={project.uid}
-                  projectData={project}
-                  uid={project.uid}
-                  techsUsed={project.techsUsed}
-                />
-              ))}
-            </div>
-          </section>
-        )}
+      <ContentContainer as="section" id="projects">
+        <h2>Projects</h2>
+        <div className="project-card-container">
+          {projects &&
+            projects.map((project) => (
+              <ProjectCard
+                key={project.uid}
+                projectData={project}
+                uid={project.uid}
+                techsUsed={project.techsUsed}
+              />
+            ))}
+        </div>
       </ContentContainer>
     </Layout>
   );
