@@ -22,7 +22,8 @@ const Header: React.FunctionComponent<HeaderProps> = ({
         background-color: rgb(var(--warm-dark-color));
         padding: 0.75rem 1rem;
         box-shadow: 0 2px 5px 0 rgba(var(--warm-dark-color), 0.6),
-          0 6px 5px 0 rgba(0, 0, 0, 0.4);
+          0 6px 5px 0 rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(2px);
       }
 
       a {
