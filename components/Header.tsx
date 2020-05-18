@@ -42,7 +42,6 @@ const Header: React.FunctionComponent<Props> = () => (
       }
 
       nav a {
-        font-variant: all-small-caps;
         font-weight: 600;
       }
 
@@ -74,7 +73,7 @@ const Header: React.FunctionComponent<Props> = () => (
     </div>
     <nav>
       <Link href="/#projects">
-        <a>Projects</a>
+        <a>projects</a>
       </Link>
       <PreviewContext.Consumer>
         {({ preview }) =>
