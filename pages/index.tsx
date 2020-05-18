@@ -2,7 +2,7 @@ import * as React from "react";
 import { GetStaticProps } from "next";
 import { Predicates } from "prismic-javascript";
 import { AugmentedProjectData, TechnologyData } from "../interfaces";
-import { Client, loadHeader } from "../prismic-configuration";
+import { Client } from "../prismic-configuration";
 import ProjectCard from "../components/ProjectCard";
 import { usePreview } from "../components/PreviewContext";
 import Hero from "../components/Hero";
@@ -55,8 +55,6 @@ const IndexPage: React.FunctionComponent<Props> = ({
   );
 };
 
-const client = Client();
-
 /**
  * Fetch the list of projects and their data so that they can be displayed on the index page.
  */
@@ -65,6 +63,7 @@ export const getStaticProps: GetStaticProps = async ({
   previewData,
 }) => {
   const ref = previewData?.ref;
+  const client = Client();
 
   const docs: any[] =
     (
@@ -107,8 +106,6 @@ export const getStaticProps: GetStaticProps = async ({
     // Both ongoing and both started on same date
     return 0;
   });
-
-  await loadHeader(ref);
 
   if (Object.keys(projects).length)
     return {

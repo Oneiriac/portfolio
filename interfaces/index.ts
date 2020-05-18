@@ -34,3 +34,10 @@ export type TechnologyData = {
   name: string;
   icon: ImageData;
 };
+
+export type HeaderData = {
+  site_title: string;
+  github_link: WebLink;
+  linkedin_link: WebLink;
+  email: string;
+};

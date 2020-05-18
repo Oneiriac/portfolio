@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FOOTER_HEIGHT } from "./constants";
+import PreviewContext from "./PreviewContext";
 
 const Footer: React.FunctionComponent = () => (
   <footer>
@@ -29,6 +30,15 @@ const Footer: React.FunctionComponent = () => (
       Made with <a href="https://nextjs.org/">Next.js</a> +{" "}
       <a href="https://prismic.io/">Prismic</a>
     </span>
+    <PreviewContext.Consumer>
+      {({ preview }) =>
+        preview && (
+          <a href="/api/exit-preview" style={{ marginLeft: "2rem" }}>
+            Exit Preview
+          </a>
+        )
+      }
+    </PreviewContext.Consumer>
   </footer>
 );
 

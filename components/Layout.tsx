@@ -2,8 +2,12 @@ import * as React from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import { FOOTER_HEIGHT } from "./constants";
+import { HeaderProps } from "../interfaces/props";
 
-const Layout: React.FunctionComponent = ({ children }) => (
+const Layout: React.FunctionComponent<HeaderProps> = ({
+  children,
+  headerData,
+}) => (
   <div className="layout">
     <style jsx>
       {`
@@ -34,7 +38,7 @@ const Layout: React.FunctionComponent = ({ children }) => (
         }
       `}
     </style>
-    <Header />
+    <Header headerData={headerData} />
     <main>{children}</main>
     <Footer />
   </div>

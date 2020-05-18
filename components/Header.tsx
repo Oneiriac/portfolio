@@ -1,10 +1,13 @@
 import * as React from "react";
 import Link from "next/link";
-import PreviewContext from "./PreviewContext";
+import { HeaderProps } from "../interfaces/props";
+import GithubSvg from "../public/github.svg";
+import LinkedInSvg from "../public/linkedin.svg";
+import MailSvg from "../public/mail.svg";
 
-type Props = {};
-
-const Header: React.FunctionComponent<Props> = () => (
+const Header: React.FunctionComponent<HeaderProps> = ({
+  headerData: { github_link, email, linkedin_link },
+}) => (
   <header>
     <style jsx>{`
       header {
@@ -26,14 +29,24 @@ const Header: React.FunctionComponent<Props> = () => (
         text-decoration: none;
         color: rgba(var(--warm-light-color), 1);
         transition: opacity 0.35s;
+        text-overflow: ellipsis;
       }
 
       a:hover {
         opacity: 0.6;
       }
 
+      .nav-name {
+        flex: 0 0 auto;
+      }
+
+      .nav-name a {
+        font-family: "Space Mono", monospace;
+        font-weight: 900;
+      }
+
       nav {
-        flex: 1 0 auto;
+        flex: 1 1 auto;
         text-align: right;
         display: flex;
         flex-direction: row;
@@ -41,32 +54,39 @@ const Header: React.FunctionComponent<Props> = () => (
         align-items: center;
       }
 
-      nav a {
+      nav a,
+      nav .divider {
         font-weight: 600;
-      }
-
-      .my-name {
-        flex: 0 0 auto;
-      }
-
-      .my-name a {
-        font-family: "Space Mono", monospace;
-        font-weight: 900;
+        margin-left: min(
+          3vw,
+          0.8rem
+        ); /* Good value across range of screen widths */
       }
 
       .divider {
-        width: 1.5rem;
+        width: min(3vw, 1.5rem);
         text-align: center;
         background-color: transparent;
       }
 
       .divider::before {
         content: "/";
-        color: rgb(var(--cool-light-color));
+        color: rgb(var(--warm-light-color));
+        font-weight: 900;
+      }
+
+      .nav-contact {
+        display: inline-flex;
+        flex-direction: row;
+      }
+
+      .nav-contact :global(svg) {
+        vertical-align: middle;
+        height: 1em;
       }
     `}</style>
 
-    <div className="my-name">
+    <div className="nav-name">
       <Link href="/">
         <a>damon cai</a>
       </Link>
@@ -75,16 +95,26 @@ const Header: React.FunctionComponent<Props> = () => (
       <Link href="/#projects">
         <a>projects</a>
       </Link>
-      <PreviewContext.Consumer>
-        {({ preview }) =>
-          preview && (
-            <>
-              <span className="divider" />
-              <a href="/api/exit-preview">Exit Preview</a>
-            </>
-          )
-        }
-      </PreviewContext.Consumer>
+      {(github_link?.url || linkedin_link?.url || email) && (
+        <span className="divider" />
+      )}
+      <div className="nav-contact">
+        {github_link?.url && (
+          <a href={github_link.url}>
+            <GithubSvg />
+          </a>
+        )}
+        {linkedin_link?.url && (
+          <a href={linkedin_link.url}>
+            <LinkedInSvg />
+          </a>
+        )}
+        {email && (
+          <a href={`mailto:${email}`}>
+            <MailSvg />
+          </a>
+        )}
+      </div>
     </nav>
   </header>
 );
