@@ -5,7 +5,6 @@ import { Predicates } from "prismic-javascript";
 import dayjs from "dayjs";
 import css from "styled-jsx/css";
 
-import Layout from "../../components/Layout";
 import TechnologyList from "../../components/TechnologyList";
 
 import { Client } from "../../prismic-configuration";
@@ -14,6 +13,7 @@ import { ProjectProps } from "../../interfaces/props";
 import { usePreview } from "../../components/PreviewContext";
 import ContentContainer from "../../components/ContentContainer";
 import HeroContainer from "../../components/HeroContainer";
+import Title from "../../components/Title";
 
 const projectContentCss = css.resolve`
   margin-top: 1rem;
@@ -36,7 +36,7 @@ const Project: React.FunctionComponent<ProjectProps> = ({
   const projectEnd = dayjs(projectData.end_date).format("MMMM YYYY");
 
   return (
-    <Layout title={projectName}>
+    <>
       <style jsx>{`
         h1 {
           font-weight: 900;
@@ -67,6 +67,7 @@ const Project: React.FunctionComponent<ProjectProps> = ({
       {heroContentCss.styles}
       {projectContentCss.styles}
 
+      <Title title={`Projects | ${projectName}`} />
       <HeroContainer
         contentClassName={heroContentCss.className}
         backgroundColorRgb={"var(--cool-light-color)"}
@@ -96,7 +97,7 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           </aside>
         </article>
       </ContentContainer>
-    </Layout>
+    </>
   );
 };
 

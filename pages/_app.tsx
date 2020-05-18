@@ -3,8 +3,9 @@ import * as React from "react";
 import { PreviewProvider } from "../components/PreviewContext";
 import "../styles.css";
 import Head from "next/head";
+import Layout from "../components/Layout";
 
-const MyApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => {
+const App: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => {
   return (
     <PreviewProvider>
       <Head>
@@ -31,9 +32,11 @@ const MyApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => {
           rel="stylesheet"
         />
       </Head>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </PreviewProvider>
   );
 };
 
-export default MyApp;
+export default App;

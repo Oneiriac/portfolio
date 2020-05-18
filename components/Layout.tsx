@@ -1,19 +1,9 @@
 import * as React from "react";
-import Head from "next/head";
 import Footer from "./Footer";
 import Header from "./Header";
 import { FOOTER_HEIGHT } from "./constants";
 
-const titleSuffix = "Portfolio";
-
-type Props = {
-  title?: string;
-};
-
-const Layout: React.FunctionComponent<Props> = ({
-  children,
-  title = "This is the default title",
-}) => (
+const Layout: React.FunctionComponent = ({ children }) => (
   <div className="layout">
     <style jsx>
       {`
@@ -44,10 +34,6 @@ const Layout: React.FunctionComponent<Props> = ({
         }
       `}
     </style>
-
-    <Head>
-      <title>{title ? `${title} | ${titleSuffix}` : titleSuffix}</title>
-    </Head>
     <Header />
     <main>{children}</main>
     <Footer />

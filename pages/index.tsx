@@ -1,13 +1,13 @@
 import * as React from "react";
-import Layout from "../components/Layout";
 import { GetStaticProps } from "next";
 import { Predicates } from "prismic-javascript";
 import { AugmentedProjectData, TechnologyData } from "../interfaces";
-import { Client } from "../prismic-configuration";
+import { Client, loadHeader } from "../prismic-configuration";
 import ProjectCard from "../components/ProjectCard";
 import { usePreview } from "../components/PreviewContext";
 import Hero from "../components/Hero";
 import ContentContainer from "../components/ContentContainer";
+import Title from "../components/Title";
 
 type ProjectsIndex = AugmentedProjectData[];
 
@@ -25,7 +25,7 @@ const IndexPage: React.FunctionComponent<Props> = ({
   usePreview(preview);
 
   return (
-    <Layout title="Home">
+    <>
       <style jsx>{`
         .project-card-container {
           display: grid;
@@ -35,6 +35,7 @@ const IndexPage: React.FunctionComponent<Props> = ({
         }
       `}</style>
 
+      <Title title={"Portfolio"} />
       <Hero technologies={technologies} />
       <ContentContainer as="section" id="projects">
         <h2>Projects</h2>
@@ -50,7 +51,7 @@ const IndexPage: React.FunctionComponent<Props> = ({
             ))}
         </div>
       </ContentContainer>
-    </Layout>
+    </>
   );
 };
 
@@ -106,6 +107,8 @@ export const getStaticProps: GetStaticProps = async ({
     // Both ongoing and both started on same date
     return 0;
   });
+
+  await loadHeader(ref);
 
   if (Object.keys(projects).length)
     return {
