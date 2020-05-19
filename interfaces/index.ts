@@ -5,7 +5,7 @@ export type ProjectData = {
   start_date: string;
   end_date: string;
   ongoing: boolean;
-  technology_link: any[];
+  technology_link: TechnologyLink[];
   live_link: WebLink;
   source_link: WebLink;
   organisation: string;
@@ -13,6 +13,12 @@ export type ProjectData = {
 
 type WebLink = {
   url?: string;
+};
+
+type TechnologyLink = {
+  technology: {
+    id: string;
+  };
 };
 
 export type AugmentedProjectData = ProjectData & {
@@ -40,4 +46,9 @@ export type HeaderData = {
   github_link: WebLink;
   linkedin_link: WebLink;
   email: string;
+};
+
+export type FrontPageData = {
+  technology_heading: string;
+  technology_link: TechnologyLink[];
 };

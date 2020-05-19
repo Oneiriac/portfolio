@@ -1,7 +1,11 @@
 import * as React from "react";
 import { GetStaticProps } from "next";
 import { Predicates } from "prismic-javascript";
-import { AugmentedProjectData, TechnologyData } from "../interfaces";
+import {
+  AugmentedProjectData,
+  FrontPageData,
+  TechnologyData,
+} from "../interfaces";
 import { Client } from "../prismic-configuration";
 import ProjectCard from "../components/ProjectCard";
 import { usePreview } from "../components/PreviewContext";
@@ -9,18 +13,20 @@ import Hero from "../components/Hero";
 import ContentContainer from "../components/ContentContainer";
 import Title from "../components/Title";
 
-type ProjectsIndex = AugmentedProjectData[];
+type AugmentedProjects = AugmentedProjectData[];
 
 interface Props {
-  projects?: ProjectsIndex;
+  projects?: AugmentedProjects;
   preview?: boolean;
   technologies: TechnologyData[];
+  techHeading: string;
 }
 
 const IndexPage: React.FunctionComponent<Props> = ({
   projects,
   preview,
   technologies,
+  techHeading,
 }) => {
   usePreview(preview);
 
@@ -36,7 +42,7 @@ const IndexPage: React.FunctionComponent<Props> = ({
       `}</style>
 
       <Title title={"Portfolio"} />
-      <Hero technologies={technologies} />
+      <Hero technologies={technologies} techHeading={techHeading} />
       <ContentContainer as="section" id="projects">
         <h2>Projects</h2>
         <div className="project-card-container">
@@ -63,17 +69,20 @@ export const getStaticProps: GetStaticProps = async ({
   previewData,
 }) => {
   const ref = previewData?.ref;
+  const queryOptions = { ref };
   const client = Client();
 
+  // Fetch all projects and technology docs
   const docs: any[] =
     (
       await client.query(
         [Predicates.any("document.type", ["project", "technology"])],
-        { ref }
+        queryOptions
       )
     )?.results ?? [];
 
-  const technologies: { [id: string]: TechnologyData } = docs.reduce(
+  // All technology docs fetched once instead of fetching each doc every time it is used
+  const allTechs: { [id: string]: TechnologyData } = docs.reduce(
     (result, doc) => {
       if (doc.type === "technology") result[doc.id] = doc.data;
       return result;
@@ -81,11 +90,12 @@ export const getStaticProps: GetStaticProps = async ({
     {}
   );
 
-  const projects: ProjectsIndex = docs.reduce((result, doc) => {
+  // Augment project data with full technology docs
+  const projects: AugmentedProjects = docs.reduce((result, doc) => {
     if (doc.type === "project") {
       const { data, uid } = doc;
       const techsUsed = data.technology_link?.map(
-        (entry: any) => technologies[entry.technology.id]
+        (entry: any) => allTechs[entry.technology.id]
       );
       result.push({
         ...data,
@@ -96,6 +106,16 @@ export const getStaticProps: GetStaticProps = async ({
     return result;
   }, []);
 
+  // Fetch front page data
+  const frontPageData = (await client.getSingle("frontpage", queryOptions))
+    ?.data as FrontPageData;
+  const frontPageTechs: TechnologyData[] =
+    frontPageData?.technology_link?.map(
+      (entry) => allTechs[entry.technology.id]
+    ) ?? [];
+  const techHeading = frontPageData.technology_heading;
+
+  // Sort projects into display order
   projects.sort((projA, projB) => {
     // Primary criterion is ongoing status
     if (projA.ongoing && !projB.ongoing) return -1;
@@ -107,11 +127,9 @@ export const getStaticProps: GetStaticProps = async ({
     return 0;
   });
 
-  if (Object.keys(projects).length)
-    return {
-      props: { preview, projects, technologies: Object.values(technologies) },
-    };
-  else return { props: { preview } };
+  return {
+    props: { preview, projects, technologies: frontPageTechs, techHeading },
+  };
 };
 
 export default IndexPage;

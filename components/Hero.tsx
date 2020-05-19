@@ -18,9 +18,13 @@ const heroContentCss = css.resolve`
 
 interface HeroProps {
   technologies: TechnologyData[];
+  techHeading: string;
 }
 
-const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
+const Hero: React.FunctionComponent<HeroProps> = ({
+  technologies,
+  techHeading,
+}) => (
   <HeroContainer
     backgroundColorRgb={"var(--warm-mid-color)"}
     contentClassName={heroContentCss.className}
@@ -130,7 +134,7 @@ const Hero: React.FunctionComponent<HeroProps> = ({ technologies }) => (
       </div>
     </FlexColumn>
     <FlexColumn as="aside" columnBasis={heroColumnBasis} columnSpan={1}>
-      <h2>Some tech I use</h2>
+      <h2>{techHeading}</h2>
       <div className="hero-tech-list">
         <TechnologyList
           techsUsed={technologies}
