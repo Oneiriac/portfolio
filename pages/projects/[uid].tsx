@@ -14,32 +14,21 @@ import { usePreview } from "../../components/PreviewContext";
 import ContentContainer from "../../components/ContentContainer";
 import HeroContainer from "../../components/HeroContainer";
 import Title from "../../components/Title";
-import { MIN_GUTTER_WIDTH } from "../../components/constants";
+import { twoColumnContainerCss } from "../../components/TwoColumnContainer";
 
 const projectContentCss = css.resolve`
   margin-top: 1rem;
+  line-height: 1.75;
 `;
 
 const heroContentCss = css.resolve`
   margin-top: 2rem;
   margin-bottom: 1rem;
+  line-height: 1.75;
 `;
 
-const projectGridCss = css.resolve`
-  & {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    line-height: 1.75;
-    /* Hack to get column gap with flexbox */
-    margin-right: -${MIN_GUTTER_WIDTH};
-    /* column-gap: 2rem; */ /* Switch to this when supported widely outside Firefox */
-  }
-
-  & > :global(*) {
-    margin-right: calc(2 * ${MIN_GUTTER_WIDTH});
-  }
-`;
+const projectColumnBasis = "10rem";
+const twoThirdsCss = twoColumnContainerCss([2, 1], projectColumnBasis);
 
 const Project: React.FunctionComponent<ProjectProps> = ({
   projectData,
@@ -62,12 +51,10 @@ const Project: React.FunctionComponent<ProjectProps> = ({
 
         .project-basic-info {
           font-weight: 400;
-          line-height: 1.5;
           margin-bottom: 1rem;
         }
 
         .project-summary {
-          line-height: 1.5;
           font-weight: 500;
         }
 
@@ -79,26 +66,18 @@ const Project: React.FunctionComponent<ProjectProps> = ({
         .project-tech-list > :global(span) {
           line-height: 3;
         }
-
-        .col-left {
-          flex: 2 1 20rem;
-        }
-
-        .col-right {
-          flex: 1 1 10rem;
-        }
       `}</style>
       {heroContentCss.styles}
       {projectContentCss.styles}
-      {projectGridCss.styles}
+      {twoThirdsCss.styles}
 
       <Title title={`Projects | ${projectName}`} />
       <HeroContainer
-        contentClassName={`${heroContentCss.className} ${projectGridCss.className}`}
+        contentClassName={`${heroContentCss.className} ${twoThirdsCss.className}`}
         backgroundColorRgb={"var(--cool-light-color)"}
         slant="right"
       >
-        <div className="col-left">
+        <div>
           <h1>{projectName}</h1>
           <div className="project-basic-info">
             <em>
@@ -113,19 +92,19 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           </div>
           <section className="project-summary">{projectData.summary}</section>
         </div>
-        <div className="col-right" />
+        <div />
       </HeroContainer>
 
       <ContentContainer as="section" className={projectContentCss.className}>
-        <article id={`project-${uid}`} className={projectGridCss.className}>
+        <article id={`project-${uid}`} className={`${twoThirdsCss.className}`}>
           {projectData.description?.length > 0 && (
-            <section className="project-description col-left">
+            <section className="project-description ">
               <h3>Project description</h3>
               <RichText render={projectData.description} />
             </section>
           )}
           {techsUsed && (
-            <aside className="project-tech-list col-right">
+            <aside className="project-tech-list">
               <h3>Technologies used</h3>
               <TechnologyList
                 techsUsed={techsUsed}

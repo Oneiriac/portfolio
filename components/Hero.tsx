@@ -1,17 +1,14 @@
 import * as React from "react";
 import TechnologyList from "./TechnologyList";
 import { TechnologyData } from "../interfaces";
-import FlexColumn from "./FlexColumn";
 import HeroContainer from "./HeroContainer";
 import css from "styled-jsx/css";
+import { twoColumnContainerCss } from "./TwoColumnContainer";
 
 const heroColumnBasis = "15rem";
+const heroColumnCss = twoColumnContainerCss([2, 1], heroColumnBasis);
 
 const heroContentCss = css.resolve`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   margin-top: 5rem;
   margin-bottom: 5rem;
 `;
@@ -27,7 +24,7 @@ const Hero: React.FunctionComponent<HeroProps> = ({
 }) => (
   <HeroContainer
     backgroundColorRgb={"var(--warm-mid-color)"}
-    contentClassName={heroContentCss.className}
+    contentClassName={`${heroContentCss.className} ${heroColumnCss.className}`}
     slant="left"
   >
     <style jsx>
@@ -101,20 +98,12 @@ const Hero: React.FunctionComponent<HeroProps> = ({
           line-height: 1.5;
           font-weight: 600;
         }
-
-        :global(.hero-personal) {
-          margin-right: 3rem;
-        }
       `}
     </style>
     {heroContentCss.styles}
+    {heroColumnCss.styles}
 
-    <FlexColumn
-      className="hero-personal"
-      as="section"
-      columnBasis={heroColumnBasis}
-      columnSpan={2}
-    >
+    <section className="hero-personal">
       <h1 className="hero-intro">
         Hi, I'm <br /> Damon{" "}
         <span className="ipa-text" tabIndex={-1}>
@@ -132,8 +121,8 @@ const Hero: React.FunctionComponent<HeroProps> = ({
         <em className="location-text">Melbourne, Australia </em>&nbsp;
         <span className="location-emoji">☕</span>
       </div>
-    </FlexColumn>
-    <FlexColumn as="aside" columnBasis={heroColumnBasis} columnSpan={1}>
+    </section>
+    <aside>
       <h2>{techHeading}</h2>
       <div className="hero-tech-list">
         <TechnologyList
@@ -141,7 +130,7 @@ const Hero: React.FunctionComponent<HeroProps> = ({
           backgroundColorRgb={"var(--cool-dark-color)"}
         />
       </div>
-    </FlexColumn>
+    </aside>
   </HeroContainer>
 );
 

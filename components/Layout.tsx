@@ -25,6 +25,7 @@ const Layout: React.FunctionComponent<HeaderProps> = ({
 
         .layout :global(h1, h2, h3, h4, h5, h6) {
           font-family: "Space Mono", monospace;
+          line-height: 1.2;
         }
 
         main {
