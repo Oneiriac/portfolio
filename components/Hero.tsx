@@ -4,6 +4,7 @@ import { TechnologyData } from "../interfaces";
 import HeroContainer from "./HeroContainer";
 import css from "styled-jsx/css";
 import { twoColumnContainerCss } from "./TwoColumnContainer";
+import IpaText from "./IpaText";
 
 const heroColumnBasis = "15rem";
 const heroColumnCss = twoColumnContainerCss([2, 1], heroColumnBasis);
@@ -35,37 +36,6 @@ const Hero: React.FunctionComponent<HeroProps> = ({
           font-weight: 900;
           margin-top: 0;
           margin-bottom: 1.5rem;
-        }
-
-        .ipa-text {
-          display: inline-block;
-          content: attr(data-ipa-text);
-          animation: fadein 4s ease-in-out;
-          opacity: 0.6;
-          font-family: Inter, sans-serif;
-          font-weight: 700;
-          transition: opacity 0.35s, transform 0.35s;
-          outline: none;
-        }
-
-        .ipa-text:hover {
-          opacity: 1;
-          transform: scale(1.05);
-        }
-
-        .ipa-text:focus,
-        .ipa-text:active {
-          transform: scale(0.9);
-        }
-
-        @keyframes fadein {
-          0% {
-            opacity: 0;
-          }
-
-          100% {
-            opacity: 0.6;
-          }
         }
 
         .hero-description {
@@ -105,10 +75,7 @@ const Hero: React.FunctionComponent<HeroProps> = ({
 
     <section className="hero-personal">
       <h1 className="hero-intro">
-        Hi, I'm <br /> Damon{" "}
-        <span className="ipa-text" tabIndex={-1}>
-          /deɪmən/
-        </span>
+        Hi, I'm <br /> Damon <IpaText>/deɪmən/</IpaText>
       </h1>
       <div className="hero-description">
         Software engineer
