@@ -27,11 +27,11 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
           transition: background-color 0.35s, transform 0.35s;
           backface-visibility: hidden;
           transform: scale(1);
+          border-radius: 0.2rem;
         }
 
         h3 {
           margin-top: 0;
-          margin-bottom: 1rem;
           transition: color 0.35s;
         }
 
