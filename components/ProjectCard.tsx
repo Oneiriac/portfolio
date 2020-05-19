@@ -40,6 +40,7 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
           margin-bottom: 1.5rem;
           flex-grow: 1;
           font-weight: 500;
+          line-height: 1.5;
         }
 
         .project-card:hover,
