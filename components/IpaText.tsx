@@ -1,36 +1,26 @@
 import * as React from "react";
 
 const IpaText: React.FunctionComponent<any> = ({ children }) => (
-  <span className="ipa-text" tabIndex={-1}>
+  <span className="ipa-text fadein-full" tabIndex={-1}>
     <style jsx>{`
       .ipa-text {
         display: inline-block;
-        animation: fadein 4s ease-in-out;
-        opacity: 0.6;
+        animation-delay: 0.5s;
+        color: rgba(var(--warm-dark-color), 0.6);
         font-family: Inter, sans-serif;
         font-weight: 700;
-        transition: opacity 0.35s, transform 0.35s;
+        transition: color 0.35s, transform 0.35s;
         outline: none;
       }
 
       .ipa-text:hover {
-        opacity: 1;
+        color: rgba(var(--warm-dark-color), 1);
         transform: scale(1.05);
       }
 
       .ipa-text:focus,
       .ipa-text:active {
         transform: scale(0.9);
-      }
-
-      @keyframes fadein {
-        0% {
-          opacity: 0;
-        }
-
-        100% {
-          opacity: 0.6;
-        }
       }
     `}</style>
 

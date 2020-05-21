@@ -43,7 +43,11 @@ const Hero: React.FunctionComponent<HeroProps> = ({
           font-weight: 700;
           line-height: 1.8;
           margin-bottom: 0.5rem;
-          opacity: 0.9;
+          animation-delay: 1s;
+        }
+
+        .location {
+          animation-delay: 1.5s;
         }
 
         .location-text {
@@ -52,6 +56,10 @@ const Hero: React.FunctionComponent<HeroProps> = ({
 
         .location-emoji {
           font-size: 2rem;
+        }
+
+        .hero-tech-section {
+          animation-delay: 2.5s;
         }
 
         .hero-tech-list {
@@ -68,30 +76,34 @@ const Hero: React.FunctionComponent<HeroProps> = ({
           line-height: 1.5;
           font-weight: 600;
         }
+
+        .hero-personal {
+          margin-bottom: 2rem;
+        }
       `}
     </style>
     {heroContentCss.styles}
     {heroColumnCss.styles}
 
     <section className="hero-personal">
-      <h1 className="hero-intro">
+      <h1 className="hero-intro fadein-full">
         Hi, I'm <br /> Damon <IpaText>/deɪmən/</IpaText>
       </h1>
-      <div className="hero-description">
+      <div className="hero-description fadein-full">
         Software engineer
         <br />
         Web developer
         <br />
         Occasional linguist
       </div>
-      <div className="location">
+      <div className="location fadein-full">
         <em className="location-text">Melbourne, Australia </em>&nbsp;
         <span className="location-emoji">☕</span>
       </div>
     </section>
-    <aside>
+    <aside className="hero-tech-section fadein-full">
       <h2>{techHeading}</h2>
-      <div className="hero-tech-list">
+      <div className="hero-tech-list fadein-full">
         <TechnologyList
           techsUsed={technologies}
           backgroundColorRgb={"var(--cool-dark-color)"}
