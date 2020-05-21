@@ -35,7 +35,10 @@ const IndexPage: React.FunctionComponent<Props> = ({
       <style jsx>{`
         .project-card-container {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+          grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(20rem, 100%), 1fr)
+          );
           grid-auto-rows: 1fr;
           gap: 2rem;
         }
@@ -43,7 +46,11 @@ const IndexPage: React.FunctionComponent<Props> = ({
 
       <Title title={"Portfolio"} />
       <Hero technologies={technologies} techHeading={techHeading} />
-      <ContentContainer as="section" id="projects">
+      <ContentContainer
+        as="section"
+        id="projects"
+        style={{ marginTop: "3rem" }}
+      >
         <h2>Projects</h2>
         <div className="project-card-container">
           {projects &&
