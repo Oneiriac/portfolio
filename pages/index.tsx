@@ -34,6 +34,7 @@ const IndexPage: React.FunctionComponent<Props> = ({
     <>
       <style jsx>{`
         .project-card-container {
+          animation-delay: 4.5s;
           display: grid;
           grid-template-columns: repeat(
             auto-fit,
@@ -49,10 +50,11 @@ const IndexPage: React.FunctionComponent<Props> = ({
       <ContentContainer
         as="section"
         id="projects"
-        style={{ marginTop: "3rem" }}
+        style={{ marginTop: "3rem", animationDelay: "4s" }}
+        className="fadein-full"
       >
         <h2>Projects</h2>
-        <div className="project-card-container">
+        <div className="project-card-container fadein-full">
           {projects &&
             projects.map((project) => (
               <ProjectCard
