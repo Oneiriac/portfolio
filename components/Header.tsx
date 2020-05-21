@@ -19,10 +19,9 @@ const Header: React.FunctionComponent<HeaderProps> = ({
         opacity: 0.95;
         width: 100%;
         line-height: 1.5;
-        background-color: rgb(var(--warm-dark-color));
-        padding: 0.75rem 1rem;
-        box-shadow: 0 2px 5px 0 rgba(var(--warm-dark-color), 0.6),
-          0 6px 5px 0 rgba(0, 0, 0, 0.2);
+        background: transparent;
+        mix-blend-mode: difference;
+        padding: 0.75rem max(2vw, 1rem);
         backdrop-filter: blur(2px);
       }
 
@@ -57,7 +56,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 
       nav a,
       nav .divider {
-        font-weight: 600;
+        font-weight: 700;
         margin-left: min(
           3vw,
           0.8rem
