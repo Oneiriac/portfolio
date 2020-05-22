@@ -67,9 +67,14 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           font-weight: 500;
         }
 
+        .project-description {
+          animation-delay: 1s;
+        }
+
         .project-tech-list {
           display: flex;
           flex-direction: column;
+          animation-delay: 1.5s;
         }
 
         .project-tech-list > :global(span) {
@@ -80,6 +85,7 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           display: flex;
           flex-direction: row;
           justify-content: center;
+          animation-delay: 0.5s;
         }
 
         .banner-image {
@@ -102,7 +108,7 @@ const Project: React.FunctionComponent<ProjectProps> = ({
         backgroundColorRgb={"var(--cool-light-color)"}
         slant="right"
       >
-        <div>
+        <div className="project-info-container fadein-full">
           <h1>{projectName}</h1>
           <div className="project-basic-info">
             <em>
@@ -122,7 +128,7 @@ const Project: React.FunctionComponent<ProjectProps> = ({
             showDetailsLink={false}
           />
         </div>
-        <div className="banner-container">
+        <div className="banner-container fadein-full">
           {fullImageUrl && (
             <img
               src={fullImageUrl}
@@ -136,13 +142,13 @@ const Project: React.FunctionComponent<ProjectProps> = ({
       <ContentContainer as="section" className={projectContentCss.className}>
         <article id={`project-${uid}`} className={`${twoThirdsCss.className}`}>
           {projectData.description?.length > 0 && (
-            <section className="project-description ">
+            <section className="project-description fadein-full">
               <h3>Project description</h3>
               <RichText render={projectData.description} />
             </section>
           )}
           {techsUsed && (
-            <aside className="project-tech-list">
+            <aside className="project-tech-list fadein-full">
               <h3>Technologies used</h3>
               <TechnologyList techsUsed={techsUsed} />
             </aside>
