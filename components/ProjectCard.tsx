@@ -14,23 +14,30 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
         .project-card::after {
           content: "";
           background: linear-gradient(
-              to left top,
-              rgba(var(--cool-dark-color), 0),
-              rgba(var(--cool-light-color), 0.8) 30%,
-              rgba(var(--cool-light-color), 1)
-            ),
+              -25deg,
+              rgba(var(--cool-light-color), 0.1),
+              rgba(var(--cool-light-color), 0.8) 40%,
+              rgba(var(--cool-light-color), 1) 80%
+            )
             ${projectData?.banner_image?.url
-              ? `url("${projectData?.banner_image?.url}")`
-              : ""};
+              ? `,url("${projectData?.banner_image?.url}")`
+              : "rgba(var(--cool-light-color), 0.7)"};
           opacity: 1;
+          transition: opacity 0.35s, filter 0.35s;
           background-size: cover;
-          filter: blur(1px);
           top: 0;
           left: 0;
           bottom: 0;
           right: 0;
           position: absolute;
           z-index: -1;
+        }
+        .project-card:hover::after,
+        .project-card:active::after,
+        .project-card:focus::after,
+        .project-card:focus-within::after {
+          opacity: 0.5;
+          filter: blur(5px);
         }
       `}
     </style>
@@ -47,7 +54,7 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
         flex-direction: column;
         box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.3),
           2px 10px 5px rgba(10, 14, 35, 0.2);
-        background: rgba(var(--cool-light-color), 0.9);
+        background: rgba(var(--cool-light-color), 1);
         color: rgba(var(--warm-dark-color), 1);
         padding: 1.5rem;
         height: 100%;
@@ -72,7 +79,6 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
       .project-card:focus,
       .project-card:focus-within,
       .project-card:active {
-        background-color: rgba(var(--cool-light-color), 1);
         outline: none;
       }
 

@@ -56,7 +56,7 @@ export const ProjectLink = React.forwardRef<HTMLAnchorElement, Props>(
         }
 
         .link-secondary {
-          background-color: rgba(var(--cool-light-color), 0.8);
+          background-color: rgba(var(--cool-light-color), 1);
           color: rgba(var(--cool-dark-color), 1);
         }
       `}</style>
