@@ -1,17 +1,19 @@
 import * as React from "react";
 import { TechnologyData } from "../interfaces";
-import TechnologyIcon from "./TechnologyIcon";
+import TechnologyIcon, { TechnologyIconProps } from "./TechnologyIcon";
 
 interface Props {
   techsUsed: TechnologyData[];
   iconFirst?: boolean;
-  backgroundColorRgb?: string;
+  showText?: boolean;
+  techIconProps?: TechnologyIconProps;
 }
 
 const TechnologyList: React.FunctionComponent<Props> = ({
   techsUsed,
   iconFirst = true,
-  backgroundColorRgb = "var(--cool-dark-color)",
+  showText = true,
+  techIconProps,
 }) =>
   Array.isArray(techsUsed) && techsUsed.length > 0 ? (
     <>
@@ -35,11 +37,8 @@ const TechnologyList: React.FunctionComponent<Props> = ({
 
       {techsUsed.map((tech) => (
         <span className="tech-item" key={tech.name}>
-          <TechnologyIcon
-            technology={tech}
-            backgroundColorRgb={backgroundColorRgb}
-          />
-          <span className="tech-name">{tech.name}</span>
+          <TechnologyIcon {...techIconProps} technology={tech} />
+          {showText && <span className="tech-name">{tech.name}</span>}
         </span>
       ))}
     </>

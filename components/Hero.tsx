@@ -98,10 +98,7 @@ const Hero: React.FunctionComponent<HeroProps> = ({
     <aside className="hero-tech-section fadein-full">
       <h2>{techHeading}</h2>
       <div className="hero-tech-list fadein-full">
-        <TechnologyList
-          techsUsed={technologies}
-          backgroundColorRgb={"var(--cool-dark-color)"}
-        />
+        <TechnologyList techsUsed={technologies} />
       </div>
     </aside>
   </HeroContainer>

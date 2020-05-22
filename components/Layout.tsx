@@ -14,12 +14,12 @@ const Layout: React.FunctionComponent<HeaderProps> = ({
         .layout {
           display: flex;
           font-family: Muli, sans-serif;
-          color: rgb(var(--warm-dark-color));
+          color: rgb(var(--warm-light-color));
           flex-direction: column;
           align-items: center;
           width: 100%;
           min-height: 100vh;
-          background-color: rgb(var(--warm-light-color));
+          background-color: rgb(var(--cool-dark-color));
           position: relative;
         }
 
