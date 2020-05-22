@@ -17,14 +17,24 @@ const Header: React.FunctionComponent<HeaderProps> = ({
         z-index: 1;
         display: flex;
         flex-direction: row;
-        opacity: 0.95;
+        opacity: 1;
         width: 100%;
         line-height: 1.5;
-        background: transparent;
-        mix-blend-mode: difference;
+        background: linear-gradient(
+          to top,
+          rgba(var(--warm-dark-color), 0.2),
+          rgba(var(--warm-dark-color), 0.7)
+        );
+        box-shadow: 0 2px 5px 0 rgba(var(--warm-dark-color), 0.4),
+          0 6px 5px 0 rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
         padding: 0.75rem max(2vw, 1rem);
         /* backdrop-filter: blur(2px); */ /* Glitch in Safari when both this and mix-blend-mode are turned on */
         font-size: 1.2em;
+      }
+
+      header * {
+        filter: drop-shadow(0 1px 1px rgba(var(--warm-dark-color), 0.2));
       }
 
       a {
