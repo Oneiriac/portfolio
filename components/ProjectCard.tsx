@@ -2,6 +2,10 @@ import * as React from "react";
 import { ProjectProps } from "../interfaces/props";
 import Link from "next/link";
 import TechnologyList from "./TechnologyList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons/faExternalLinkAlt";
+import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons/faEllipsisH";
 
 const ProjectCard: React.FunctionComponent<ProjectProps> = ({
   projectData,
@@ -78,6 +82,12 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
         text-transform: lowercase;
       }
 
+      .links-row > a :global(svg) {
+        vertical-align: middle;
+        height: 1.2em;
+        margin-right: 0.5em;
+      }
+
       .links-row > a:hover,
       .links-row > a:focus,
       .links-row > a:focus-within {
@@ -109,13 +119,22 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
       </div>
       <div className="links-row">
         {projectData.live_link?.url && (
-          <a href={projectData.live_link.url}>Check it out</a>
+          <a href={projectData.live_link.url}>
+            <FontAwesomeIcon icon={faExternalLinkAlt} />
+            Check it out
+          </a>
         )}
         {projectData.source_link?.url && (
-          <a href={projectData.source_link.url}>View source</a>
+          <a href={projectData.source_link.url}>
+            <FontAwesomeIcon icon={faGithub} />
+            View source
+          </a>
         )}
         <Link href={`projects/${uid}`}>
-          <a>More details</a>
+          <a>
+            <FontAwesomeIcon icon={faEllipsisH} />
+            More details
+          </a>
         </Link>
       </div>
     </div>
