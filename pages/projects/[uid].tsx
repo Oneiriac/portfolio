@@ -201,12 +201,16 @@ export const getStaticProps: GetStaticProps = async ({
   if (!uid || typeof uid !== "string") throw new Error("");
   const doc = (await client.getByUID("project", uid, queryOptions)) ?? null;
   const techLink = doc?.data?.technology_link;
-  let techsUsed: TechnologyData[] = [];
+  let techsUsed: (TechnologyData & { id: string })[] = [];
   if (Array.isArray(techLink)) {
-    const techIds = techLink.map((entry) => entry.technology.id);
+    const techIds: string[] = techLink.map((entry) => entry.technology.id);
     techsUsed = (
       await client.query([Predicates.any("document.id", techIds)], { ref })
-    )?.results.map((entry) => entry.data);
+    )?.results.map((entry) => ({ ...entry.data, id: entry.id }));
+    // Reorder them into the original order
+    techsUsed.sort(
+      (techA, techB) => techIds.indexOf(techA.id) - techIds.indexOf(techB.id)
+    );
   }
   if (doc?.data)
     return { props: { projectData: doc.data, uid, techsUsed, preview } };
