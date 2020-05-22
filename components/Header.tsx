@@ -52,6 +52,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
         flex-direction: row;
         justify-content: flex-end;
         align-items: center;
+        text-transform: lowercase;
       }
 
       nav a,
@@ -93,7 +94,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
     </div>
     <nav>
       <Link href="/#projects">
-        <a>projects</a>
+        <a>Projects</a>
       </Link>
       {(github_link?.url || linkedin_link?.url || email) && (
         <span className="divider" />
