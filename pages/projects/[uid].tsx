@@ -27,6 +27,11 @@ const heroContentCss = css.resolve`
   line-height: 1.75;
 `;
 
+const removeQueryFromUrl = (url: string): string => {
+  const urlObject = new URL(url);
+  return urlObject.origin + urlObject.pathname;
+};
+
 const projectColumnBasis = "10rem";
 const twoThirdsCss = twoColumnContainerCss([2, 1], projectColumnBasis);
 
@@ -40,6 +45,9 @@ const Project: React.FunctionComponent<ProjectProps> = ({
   const projectName = projectData.name;
   const projectStart = dayjs(projectData.start_date).format("MMMM YYYY");
   const projectEnd = dayjs(projectData.end_date).format("MMMM YYYY");
+  const fullImageUrl = projectData.banner_image?.url
+    ? removeQueryFromUrl(projectData.banner_image.url)
+    : null;
 
   return (
     <>
@@ -65,6 +73,22 @@ const Project: React.FunctionComponent<ProjectProps> = ({
 
         .project-tech-list > :global(span) {
           line-height: 3;
+        }
+
+        .banner-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+        }
+
+        .banner-image {
+          object-fit: contain;
+          margin-top: 2rem;
+          max-height: 20rem;
+          max-width: 20rem;
+          border-radius: 0.2rem;
+          box-shadow: 1px 5px 2px 1px rgba(0, 0, 0, 0.3),
+            2px 10px 5px 2px rgba(10, 14, 35, 0.2);
         }
       `}</style>
       {heroContentCss.styles}
@@ -92,7 +116,15 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           </div>
           <section className="project-summary">{projectData.summary}</section>
         </div>
-        <div />
+        <div className="banner-container">
+          {fullImageUrl && (
+            <img
+              src={fullImageUrl}
+              className="banner-image"
+              alt={projectData?.banner_image?.alt ?? undefined}
+            />
+          )}
+        </div>
       </HeroContainer>
 
       <ContentContainer as="section" className={projectContentCss.className}>

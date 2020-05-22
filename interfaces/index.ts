@@ -9,6 +9,7 @@ export type ProjectData = {
   live_link: WebLink;
   source_link: WebLink;
   organisation: string;
+  banner_image: ImageData;
 };
 
 type WebLink = {
