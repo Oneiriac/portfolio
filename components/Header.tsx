@@ -1,9 +1,10 @@
 import * as React from "react";
 import Link from "next/link";
 import { HeaderProps } from "../interfaces/props";
-import GithubSvg from "../public/github.svg";
-import LinkedInSvg from "../public/linkedin.svg";
-import MailSvg from "../public/mail.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub";
+import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons/faLinkedinIn";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons/faPaperPlane";
 
 const Header: React.FunctionComponent<HeaderProps> = ({
   headerData: { github_link, email, linkedin_link },
@@ -23,6 +24,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
         mix-blend-mode: difference;
         padding: 0.75rem max(2vw, 1rem);
         backdrop-filter: blur(2px);
+        font-size: 1.2em;
       }
 
       a {
@@ -83,7 +85,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 
       .nav-contact :global(svg) {
         vertical-align: middle;
-        height: 1em;
       }
     `}</style>
 
@@ -102,17 +103,17 @@ const Header: React.FunctionComponent<HeaderProps> = ({
       <div className="nav-contact">
         {github_link?.url && (
           <a href={github_link.url}>
-            <GithubSvg />
+            <FontAwesomeIcon icon={faGithub} height={"1em"} />
           </a>
         )}
         {linkedin_link?.url && (
           <a href={linkedin_link.url}>
-            <LinkedInSvg />
+            <FontAwesomeIcon icon={faLinkedinIn} height={"1em"} />
           </a>
         )}
         {email && (
           <a href={`mailto:${email}`}>
-            <MailSvg />
+            <FontAwesomeIcon icon={faPaperPlane} height={"1em"} />
           </a>
         )}
       </div>
