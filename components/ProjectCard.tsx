@@ -24,7 +24,8 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
         color: rgba(var(--warm-dark-color), 1);
         padding: 1.5rem;
         height: 100%;
-        transition: background-color 0.35s;
+        transition: background-color 0.35s, transform 0.15s;
+        transform: translateY(0);
         border-radius: 0.2rem;
       }
 
@@ -45,6 +46,7 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
       .project-card:focus,
       .project-card:focus-within {
         background-color: rgba(var(--cool-light-color), 1);
+        transform: translateY(-0.25rem);
       }
 
       .bottom-rows {
