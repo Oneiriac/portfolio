@@ -50,6 +50,7 @@ const IndexPage: React.FunctionComponent<Props> = ({
         as="section"
         id="projects"
         style={{ marginTop: "3rem" }}
+        className="fadein-full"
       >
         <h2>Projects</h2>
         <div className="project-card-container">
