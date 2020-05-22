@@ -45,11 +45,16 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
         margin-bottom: 1.5rem;
       }
 
-      .project-card:active,
       .project-card:hover,
       .project-card:focus,
-      .project-card:focus-within {
+      .project-card:focus-within,
+      .project-card:active {
         background-color: rgba(var(--cool-light-color), 1);
+      }
+
+      .project-card:focus,
+      .project-card:focus-within,
+      .project-card:active {
         transform: translateY(-0.25rem);
       }
 
@@ -64,42 +69,51 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
         margin-bottom: 1rem;
       }
 
-      .links-row > a {
+      .link-base {
         display: inline-block;
         font-size: 0.75rem;
         font-weight: 700;
         margin-right: 1em;
         margin-top: 1em;
         padding: 0.5rem 0.75rem;
-        box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2),
-          2px 2px 3px 2px rgba(67, 107, 227, 0.1);
         border-radius: 0.2rem;
         transition: all 0.35s;
         backface-visibility: hidden;
-        background-color: rgba(var(--cool-dark-color), 0.8);
-        color: rgba(var(--warm-light-color), 1);
         transform: scale(1);
         text-transform: lowercase;
+        opacity: 0.9;
+        box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2),
+          1px 2px 3px 2px rgba(67, 107, 227, 0.1);
       }
 
-      .links-row > a :global(svg) {
+      .link-base:hover,
+      .link-base:focus,
+      .link-base:focus-within {
+        transform: scale(1.02);
+        outline: none;
+        opacity: 1;
+      }
+
+      .link-base:active {
+        transform: scale(0.98);
+        outline: none;
+        opacity: 1;
+      }
+
+      .link-base :global(svg) {
         vertical-align: middle;
         height: 1.2em;
         margin-right: 0.5em;
       }
 
-      .links-row > a:hover,
-      .links-row > a:focus,
-      .links-row > a:focus-within {
+      .link-primary {
         background-color: rgba(var(--cool-dark-color), 1);
-        transform: scale(1.02);
-        outline: none;
+        color: rgba(var(--warm-light-color), 1);
       }
 
-      .links-row > a:active {
-        background-color: rgba(var(--cool-dark-color), 1);
-        transform: scale(0.98);
-        outline: none;
+      .link-secondary {
+        background-color: transparent;
+        color: rgba(var(--cool-dark-color), 1);
       }
     `}</style>
 
@@ -119,19 +133,25 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
       </div>
       <div className="links-row">
         {projectData.live_link?.url && (
-          <a href={projectData.live_link.url}>
+          <a
+            href={projectData.live_link.url}
+            className="link-base link-primary"
+          >
             <FontAwesomeIcon icon={faExternalLinkAlt} />
             Check it out
           </a>
         )}
         {projectData.source_link?.url && (
-          <a href={projectData.source_link.url}>
+          <a
+            href={projectData.source_link.url}
+            className="link-base link-primary"
+          >
             <FontAwesomeIcon icon={faGithub} />
             View source
           </a>
         )}
         <Link href={`projects/${uid}`}>
-          <a>
+          <a className="link-base link-secondary">
             <FontAwesomeIcon icon={faEllipsisH} />
             More details
           </a>
