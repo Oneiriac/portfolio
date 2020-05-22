@@ -50,12 +50,14 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
       .project-card:focus-within,
       .project-card:active {
         background-color: rgba(var(--cool-light-color), 1);
+        outline: none;
       }
 
       .project-card:focus,
       .project-card:focus-within,
       .project-card:active {
         transform: translateY(-0.25rem);
+        outline: none;
       }
 
       .bottom-rows {
