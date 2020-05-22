@@ -150,7 +150,12 @@ const Project: React.FunctionComponent<ProjectProps> = ({
           {techsUsed && (
             <aside className="project-tech-list fadein-full">
               <h3>Technologies used</h3>
-              <TechnologyList techsUsed={techsUsed} />
+              <TechnologyList
+                techsUsed={techsUsed}
+                techIconProps={{
+                  backgroundColorRgb: "var(--warm-light-color)",
+                }}
+              />
             </aside>
           )}
         </article>
