@@ -10,8 +10,8 @@ const heroColumnBasis = "15rem";
 const heroColumnCss = twoColumnContainerCss([2, 1], heroColumnBasis);
 
 const heroContentCss = css.resolve`
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
 `;
 
 interface HeroProps {
@@ -31,7 +31,7 @@ const Hero: React.FunctionComponent<HeroProps> = ({
     <style jsx>
       {`
         h1 {
-          font-size: 3.5rem;
+          font-size: 3rem;
           line-height: 1.25;
           font-weight: 900;
           margin-top: 0;
@@ -59,15 +59,13 @@ const Hero: React.FunctionComponent<HeroProps> = ({
         }
 
         .hero-tech-section {
+          margin-top: 1rem;
           animation-delay: 2.5s;
         }
 
         .hero-tech-list {
           display: grid;
-          grid-template-columns: repeat(
-            auto-fill,
-            minmax(calc(0.5 * ${heroColumnBasis}), 1fr)
-          );
+          grid-template-columns: repeat(auto-fill, minmax(min(7rem, 50%), 1fr));
           column-gap: 2rem;
           row-gap: 0.75rem;
         }
@@ -75,10 +73,6 @@ const Hero: React.FunctionComponent<HeroProps> = ({
         .hero-tech-list :global(*) {
           line-height: 1.5;
           font-weight: 600;
-        }
-
-        .hero-personal {
-          margin-bottom: 2rem;
         }
       `}
     </style>
