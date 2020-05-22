@@ -22,6 +22,11 @@ body {
   box-sizing: border-box;
 }
 
+a,
+a:visited {
+  color: inherit;
+}
+
 .fadein-full {
   animation: _fadein 1s forwards;
   opacity: 0;
