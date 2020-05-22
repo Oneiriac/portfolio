@@ -23,7 +23,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
         background: transparent;
         mix-blend-mode: difference;
         padding: 0.75rem max(2vw, 1rem);
-        backdrop-filter: blur(2px);
+        /* backdrop-filter: blur(2px); */ /* Glitch in Safari when both this and mix-blend-mode are turned on */
         font-size: 1.2em;
       }
 
