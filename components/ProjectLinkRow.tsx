@@ -33,7 +33,7 @@ const ProjectLinkRow: React.FunctionComponent<Props> = ({
       </ProjectLink>
     )}
     {showDetailsLink && (
-      <Link href={`projects/${uid}`}>
+      <Link href={`projects/${uid}`} passHref={true}>
         <ProjectLink linkType={"secondary"}>
           <FontAwesomeIcon icon={faEllipsisH} />
           More details
