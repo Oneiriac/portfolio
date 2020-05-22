@@ -15,6 +15,7 @@ import ContentContainer from "../../components/ContentContainer";
 import HeroContainer from "../../components/HeroContainer";
 import Title from "../../components/Title";
 import { twoColumnContainerCss } from "../../components/TwoColumnContainer";
+import ProjectLinkRow from "../../components/ProjectLinkRow";
 
 const projectContentCss = css.resolve`
   margin-top: 1rem;
@@ -115,6 +116,11 @@ const Project: React.FunctionComponent<ProjectProps> = ({
             </em>
           </div>
           <section className="project-summary">{projectData.summary}</section>
+          <ProjectLinkRow
+            projectData={projectData}
+            uid={uid}
+            showDetailsLink={false}
+          />
         </div>
         <div className="banner-container">
           {fullImageUrl && (

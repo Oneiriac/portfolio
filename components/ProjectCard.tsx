@@ -1,11 +1,7 @@
 import * as React from "react";
 import { ProjectProps } from "../interfaces/props";
-import Link from "next/link";
 import TechnologyList from "./TechnologyList";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons/faExternalLinkAlt";
-import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub";
-import { faEllipsisH } from "@fortawesome/free-solid-svg-icons/faEllipsisH";
+import ProjectLinkRow from "./ProjectLinkRow";
 
 const ProjectCard: React.FunctionComponent<ProjectProps> = ({
   projectData,
@@ -97,53 +93,6 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
         flex-wrap: wrap;
         margin-bottom: 1rem;
       }
-
-      .link-base {
-        display: inline-block;
-        font-size: 0.75rem;
-        font-weight: 700;
-        margin-right: 1em;
-        margin-top: 1em;
-        padding: 0.5rem 0.75rem;
-        border-radius: 0.2rem;
-        transition: all 0.35s;
-        backface-visibility: hidden;
-        transform: scale(1);
-        text-transform: lowercase;
-        opacity: 0.9;
-        box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2),
-          1px 2px 3px 2px rgba(67, 107, 227, 0.1);
-      }
-
-      .link-base:hover,
-      .link-base:focus,
-      .link-base:focus-within {
-        transform: scale(1.02);
-        outline: none;
-        opacity: 1;
-      }
-
-      .link-base:active {
-        transform: scale(0.98);
-        outline: none;
-        opacity: 1;
-      }
-
-      .link-base :global(svg) {
-        vertical-align: middle;
-        height: 1.2em;
-        margin-right: 0.5em;
-      }
-
-      .link-primary {
-        background-color: rgba(var(--cool-dark-color), 1);
-        color: rgba(var(--warm-light-color), 1);
-      }
-
-      .link-secondary {
-        background-color: rgba(var(--cool-light-color), 0.8);
-        color: rgba(var(--cool-dark-color), 1);
-      }
     `}</style>
 
     <h3>{projectData.name}</h3>
@@ -160,32 +109,7 @@ const ProjectCard: React.FunctionComponent<ProjectProps> = ({
           />
         )}
       </div>
-      <div className="links-row">
-        {projectData.live_link?.url && (
-          <a
-            href={projectData.live_link.url}
-            className="link-base link-primary"
-          >
-            <FontAwesomeIcon icon={faExternalLinkAlt} />
-            Check it out
-          </a>
-        )}
-        {projectData.source_link?.url && (
-          <a
-            href={projectData.source_link.url}
-            className="link-base link-primary"
-          >
-            <FontAwesomeIcon icon={faGithub} />
-            View source
-          </a>
-        )}
-        <Link href={`projects/${uid}`}>
-          <a className="link-base link-secondary">
-            <FontAwesomeIcon icon={faEllipsisH} />
-            More details
-          </a>
-        </Link>
-      </div>
+      <ProjectLinkRow projectData={projectData} uid={uid} />
     </div>
   </div>
 );
