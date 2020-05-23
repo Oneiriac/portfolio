@@ -133,7 +133,7 @@ const Project: React.FunctionComponent<ProjectProps> = ({
             <img
               src={fullImageUrl}
               className="banner-image"
-              alt={projectData?.banner_image?.alt ?? undefined}
+              alt={projectData?.banner_image?.alt ?? "Project screenshot"}
             />
           )}
         </div>

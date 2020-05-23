@@ -112,17 +112,17 @@ const Header: React.FunctionComponent<HeaderProps> = ({
       )}
       <div className="nav-contact">
         {github_link?.url && (
-          <a href={github_link.url}>
+          <a href={github_link.url} aria-label="github-link">
             <FontAwesomeIcon icon={faGithub} height={"1em"} />
           </a>
         )}
         {linkedin_link?.url && (
-          <a href={linkedin_link.url}>
+          <a href={linkedin_link.url} aria-label="linkedin-link">
             <FontAwesomeIcon icon={faLinkedinIn} height={"1em"} />
           </a>
         )}
         {email && (
-          <a href={`mailto:${email}`}>
+          <a href={`mailto:${email}`} aria-label="mailto-link">
             <FontAwesomeIcon icon={faPaperPlane} height={"1em"} />
           </a>
         )}

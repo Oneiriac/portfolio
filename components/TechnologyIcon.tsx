@@ -55,7 +55,10 @@ const TechnologyIcon: React.FunctionComponent<TechnologyIconPropsLocal> = ({
     `}</style>
 
     {technology && (
-      <img src={technology.icon.url} alt={technology.icon.alt ?? undefined} />
+      <img
+        src={technology.icon.url}
+        alt={technology.icon.alt ?? `${technology.name} icon`}
+      />
     )}
   </span>
 );
